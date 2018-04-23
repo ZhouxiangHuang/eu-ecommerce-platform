@@ -179,4 +179,27 @@ class BaseController extends \yii\web\Controller
             return 'Fail Request.';
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function beforeAction($action)
+    {
+        $authenticated = true;
+        $authorized = true;
+        if($authenticated && $authorized) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    private function isAuthorized() {
+        
+    }
+    
+    private function isAuthenticated() {
+        
+    }
+
 }

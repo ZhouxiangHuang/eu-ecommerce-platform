@@ -1,5 +1,6 @@
 <?php
 namespace app\modules\site\controllers;
+use yii\filters\AccessControl;
 
 /**
  * Created by PhpStorm.
@@ -11,5 +12,17 @@ class UserController extends BaseController
 {
     public function actionTest() {
         return 'Hello World!';
+    }
+
+    public function actionRegister() {
+
+    }
+
+    public function actionLogin() {
+
+    }
+
+    public function actionLogout() {
+
     }
 }
