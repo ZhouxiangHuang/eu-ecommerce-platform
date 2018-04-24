@@ -148,9 +148,9 @@ class BaseController extends \yii\web\Controller
             if ($accessToken && $accessToken !== "null") {
                 $decoded = JWT::decode($accessToken, file_get_contents(__DIR__ . "/../../api/cert/public_key.pem"), array('RS256'));
                 $decoded_array = (array)$decoded;
-                if (ArrayHelper::getValue($decoded_array, "uid")) {
-                    $intval = intval(ArrayHelper::getValue($decoded_array, "uid"));
-                    $static = Users::findOne($intval);
+                if (ArrayHelper::getValue($decoded_array, "uid") && ArrayHelper::getValue($decoded_array, "time")) {
+                    $userId = intval(ArrayHelper::getValue($decoded_array, "uid"));
+                    $static = Users::findOne($userId);
                     if ($static) {
                         return $static;
                     } else {
@@ -194,12 +194,4 @@ class BaseController extends \yii\web\Controller
         }
     }
     
-    private function isAuthorized() {
-        
-    }
-    
-    private function isAuthenticated() {
-        
-    }
-
 }

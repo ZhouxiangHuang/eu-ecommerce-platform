@@ -15,7 +15,7 @@ class UserController extends BaseController
     }
 
     public function actionRegister() {
-
+        
     }
 
     public function actionLogin() {
@@ -25,4 +25,5 @@ class UserController extends BaseController
     public function actionLogout() {
 
     }
+    
 }
