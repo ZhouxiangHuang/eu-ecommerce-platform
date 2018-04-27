@@ -12,7 +12,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
-    'controllerNamespace' => 'controllers',
+//    'controllerNamespace' => 'controllers',
     'components' => [
         'request' => [
             'cookieValidationKey' => 'lZTxg0vJgnm2470biXEgeR4YK0NocgZO',
@@ -68,7 +68,7 @@ $config = [
         ],
         'db' => $db,
     ],
-    'modules' => $modules,
+//    'modules' => $modules,
     'params' => $params,
 ];
 
@@ -85,7 +85,7 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
+        'allowedIPs' => ['*'],
     ];
 }
 
