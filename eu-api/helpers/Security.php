@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
  */
 class Security
 {
-    public function generateAccessToken($user_id) {
+    static function generateAccessToken($user_id) {
         $accessToken = JWT::encode([
             'uid' => $user_id,
             'time' => time(),
@@ -20,7 +20,7 @@ class Security
         return $accessToken;
     }
     
-    public function validateAccessToken($token) {
+    static function validateAccessToken($token) {
         $decoded = JWT::decode($token, file_get_contents(__DIR__ . "/../../api/cert/public_key.pem"), array('RS256'));
         $decoded_array = (array)$decoded;
         if (ArrayHelper::getValue($decoded_array, "uid") && ArrayHelper::getValue($decoded_array, "time")) {
@@ -30,7 +30,7 @@ class Security
         }
     }
     
-    public function validateAuthority($token, $action) {
+    static function validateAuthority($token, $action) {
         $decoded = JWT::decode($token, file_get_contents(__DIR__ . "/../../api/cert/public_key.pem"), array('RS256'));
         $decoded_array = (array)$decoded;
         $userId = ArrayHelper::getValue($decoded_array, "uid");

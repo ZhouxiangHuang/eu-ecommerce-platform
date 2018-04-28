@@ -9,4 +9,5 @@ namespace app\modules\site\tests;
 
 class UserTest extends \Codeception\Test\Unit
 {
+
 }

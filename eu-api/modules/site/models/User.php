@@ -59,4 +59,21 @@ class User extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    static function findIdByMobile($mobile) {
+        $user = User::findOne(['mobile' => $mobile]);
+        return $user->id;
+    }
+
+    static function createNewUser($mobile, $role) {
+        $user = new User();
+        $user->mobile = $mobile;
+        $user->role = $role;
+        return $user->save();
+    }
+
+    static function isValid($mobile) {
+        $user = User::findOne(['mobile' => $mobile]);
+        return $user ? true : false;
+    }
 }
