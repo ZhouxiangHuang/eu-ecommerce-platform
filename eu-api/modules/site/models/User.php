@@ -19,6 +19,9 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord
 {
+    const ROLE_MERCHANT = 1;
+    const ROLE_CUSTOMER = 2;
+
     /**
      * @inheritdoc
      */
@@ -75,5 +78,9 @@ class User extends \yii\db\ActiveRecord
     static function isValid($mobile) {
         $user = User::findOne(['mobile' => $mobile]);
         return $user ? true : false;
+    }
+
+    static function getMerchant() {
+
     }
 }
