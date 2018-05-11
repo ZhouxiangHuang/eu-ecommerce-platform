@@ -1,6 +1,7 @@
 <?php
 namespace app\modules\site\controllers;
 use app\helpers\Security;
+use app\helpers\WechatHelper;
 use app\modules\site\models\ProductCategories;
 use app\modules\site\models\Products;
 use app\modules\site\models\User;
@@ -99,16 +100,19 @@ class UserController extends BaseController
     }
 
     public function actionLogin() {
-        $mobile = Yii::$app->request->post('mobile');
-
-        if(User::isValid($mobile)) {
-            $userId = User::findIdByMobile($mobile);
-            $accessToken = Security::generateAccessToken($userId);
-            $data = ['access_token' => $accessToken];
-            return $this->returnJson($data, true);
-        } else {
-            $this->returnJson([], false, '登陆失败');
-        }
+        $code = Yii::$app->request->post('code');
+        $userWechatInfo = WechatHelper::userInfo($code);
+        return $this->returnJson($userWechatInfo, true);
+//        $mobile = Yii::$app->request->post('mobile');
+//
+//        if(User::isValid($mobile)) {
+//            $userId = User::findIdByMobile($mobile);
+//            $accessToken = Security::generateAccessToken($userId);
+//            $data = ['access_token' => $accessToken];
+//            return $this->returnJson($data, true);
+//        } else {
+//            $this->returnJson([], false, '登陆失败');
+//        }
     }
     
 }

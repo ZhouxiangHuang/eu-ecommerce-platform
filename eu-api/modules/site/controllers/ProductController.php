@@ -9,6 +9,8 @@
 namespace app\modules\site\controllers;
 
 
+use app\modules\site\models\Products;
+use app\modules\site\models\User;
 use app\modules\site\ProductFactory;
 use Yii;
 
@@ -24,16 +26,26 @@ class ProductController extends BaseController
             'description' => Yii::$app->request->post('description')
         ];
 
-        $product = ProductFactory::create($form);
-        $product->save();
+        $result = ProductFactory::create($form);
+        if($result) {
+            $this->returnJson([], true);
+        } else {
+            $this->returnJson([], false);
+        }
     }
 
     public function actionDetail($product_id) {
-
+        $product = Products::detail($product_id);
+        $this->returnJson($product, true);
     }
 
-    public function actionProducts($merchant_id) {
+    public function actionProducts() {
+        $user = $this->getUserModel();
+        $merchant = User::getMerchant($user->id);
+        $merchant_id = $merchant->id;
 
+        $products = Products::all($merchant_id);
+        $this->returnJson($products, true);
     }
 
 }

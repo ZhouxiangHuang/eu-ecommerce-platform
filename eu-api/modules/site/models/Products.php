@@ -64,4 +64,12 @@ class Products extends \yii\db\ActiveRecord
         ];
     }
 
+    static function detail($id) {
+        return Products::findOne(['id' => $id]);
+    }
+
+    static function all($merchantId) {
+        return Products::findAll(['merchant_id' => $merchantId]);
+    }
+
 }

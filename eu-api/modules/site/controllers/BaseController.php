@@ -2,6 +2,7 @@
 
 namespace app\modules\site\controllers;
 
+use app\modules\site\models\User;
 use Yii;
 use yii\base\Model;
 use yii\data\Pagination;
@@ -138,7 +139,7 @@ class BaseController extends \yii\web\Controller
 
 
     /**
-     * @return Users
+     * @return User
      * @throws \yii\base\Exception
      */
     public function getUserModel()
@@ -150,7 +151,7 @@ class BaseController extends \yii\web\Controller
                 $decoded_array = (array)$decoded;
                 if (ArrayHelper::getValue($decoded_array, "uid") && ArrayHelper::getValue($decoded_array, "time")) {
                     $userId = intval(ArrayHelper::getValue($decoded_array, "uid"));
-                    $static = Users::findOne($userId);
+                    $static = User::findOne($userId);
                     if ($static) {
                         return $static;
                     } else {

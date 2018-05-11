@@ -82,7 +82,7 @@ class User extends \yii\db\ActiveRecord
         return $user ? true : false;
     }
 
-    static function getMerchant() {
-
+    static function getMerchant($userId) {
+        return Merchants::findOne(['user_id' => $userId]);
     }
 }

@@ -20,6 +20,7 @@ class m180511_104134_CreateMerchantTable extends Migration
 
         $this->createTable('{{%merchants}}', [
             'id' => $this->primaryKey(),
+            'user_id' => $this->integer(10)->notNull()->comment('用户'),
             'store_name' => $this->string(20)->notNull()->comment('商户名'),
             'open_at' => $this->dateTime()->comment('开店时间'),
             'closed_at' => $this->dateTime()->comment('关店时间'),

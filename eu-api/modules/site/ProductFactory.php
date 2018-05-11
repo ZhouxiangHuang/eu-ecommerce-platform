@@ -17,6 +17,7 @@ class ProductFactory implements ProductFactoryInterface
 {
     static function create($form)
     {
+        
         $product = new Products();
         $product->type = ArrayHelper::getValue($form, 'type');
         $product->merchant_id = ArrayHelper::getValue($form, 'merchant_id');
@@ -24,6 +25,7 @@ class ProductFactory implements ProductFactoryInterface
         $product->price = ArrayHelper::getValue($form, 'price');
         $product->hot_item = ArrayHelper::getValue($form, 'hot');
         $product->description = ArrayHelper::getValue($form, 'description');
-        return $product;
+        $product->status = 1;
+        return $product->save();
     }
 }
