@@ -68,7 +68,7 @@ $config = [
         ],
         'db' => $db,
     ],
-//    'modules' => $modules,
+    'modules' => $modules,
     'params' => $params,
 ];
 

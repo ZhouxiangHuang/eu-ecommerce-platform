@@ -14,6 +14,7 @@ use Yii;
  * @property string $product_unique_code 编号
  * @property int $cover_image 封面图
  * @property int $hot_item 是否热销
+ * @property int $status 状态
  * @property string $description 简介
  * @property string $created_at 创建时间
  * @property string $updated_at 更新时间
@@ -62,4 +63,5 @@ class Products extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
 }

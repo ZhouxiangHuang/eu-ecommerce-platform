@@ -15,9 +15,7 @@ use Yii;
 class ProductController extends BaseController
 {
     public function actionCreate() {
-        $user = $this->getUserModel();
-        //TODO: find merchant
-        
+
         $form = [
             'type' => Yii::$app->request->post('type'),
             'price' => Yii::$app->request->post('price'),
@@ -29,4 +27,13 @@ class ProductController extends BaseController
         $product = ProductFactory::create($form);
         $product->save();
     }
+
+    public function actionDetail($product_id) {
+
+    }
+
+    public function actionProducts($merchant_id) {
+
+    }
+
 }

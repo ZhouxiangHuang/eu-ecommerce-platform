@@ -68,10 +68,12 @@ class User extends \yii\db\ActiveRecord
         return $user->id;
     }
 
-    static function createNewUser($mobile, $role) {
+    static function register($mobile, $role, $openId, $unionId) {
         $user = new User();
         $user->mobile = $mobile;
         $user->role = $role;
+        $user->wx_open_id = $openId;
+        $user->wx_union_id = $unionId;
         return $user->save();
     }
 
