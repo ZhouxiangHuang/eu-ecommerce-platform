@@ -7,6 +7,7 @@ use app\modules\site\models\Products;
 use app\modules\site\models\User;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 
 /**
  * Created by PhpStorm.
@@ -48,71 +49,32 @@ class UserController extends BaseController
 
         $all = ProductCategories::find()->groupBy('parent_id')->all();
         var_dump($all);
-
-//        foreach ($categories as $key => $val) {
-//            $model = new ProductCategories();
-//            $model->name = $key;
-//            $model->type = 1;
-//            $model->parent_id = 0;
-//            $model->save();
-//            $parent = ProductCategories::findOne(['name' => $key]);
-//            $parentId = $parent->id;
-//            foreach ($val as $v => $t) {
-//                if(count($val[$v]) > 1) {
-//                    $model = new ProductCategories();
-//                    $model->name = $v;
-//                    $model->type = 2;
-//                    $model->parent_id = $parentId;
-//                    $model->save();
-//                    $p = ProductCategories::findOne(['name' => $v, 'parent_id' => $parentId]);
-//                    $pid = $p->id;
-//                    foreach($val[$v] as $type) {
-//                        $model = new ProductCategories();
-//                        $model->name = $type;
-//                        $model->type = 3;
-//                        $model->parent_id = $pid;
-//                        $model->save();
-//                    }
-//                } else {
-//                    $model = new ProductCategories();
-//                    $model->name = $t;
-//                    $model->type = 2;
-//                    $model->parent_id = $parentId;
-//                    $model->save();
-//                }
-//            }
-//        }
     }
 
-    public function actionRegister() {
-        $mobile = Yii::$app->request->post('mobile');
-        $role = Yii::$app->request->post('role');
-
-        if(User::register($mobile, $role)) {
-            $message = '注册成功';
-            $isSuccess = true;
-        } else {
-            $message = '注册账户失败';
-            $isSuccess = false;
-        }
-
-        return $this->returnJson([], $isSuccess, $message);
-    }
+//    public function actionRegister() {
+//        $code = Yii::$app->request->post('code');
+//        $userWechatInfo = WechatHelper::userInfo($code);
+//
+//        return $this->returnJson($userWechatInfo, true);
+//    }
 
     public function actionLogin() {
         $code = Yii::$app->request->post('code');
         $userWechatInfo = WechatHelper::userInfo($code);
-        return $this->returnJson($userWechatInfo, true);
-//        $mobile = Yii::$app->request->post('mobile');
-//
-//        if(User::isValid($mobile)) {
-//            $userId = User::findIdByMobile($mobile);
-//            $accessToken = Security::generateAccessToken($userId);
-//            $data = ['access_token' => $accessToken];
-//            return $this->returnJson($data, true);
-//        } else {
-//            $this->returnJson([], false, '登陆失败');
-//        }
+
+        if(!$userWechatInfo) {
+            return $this->returnJson([], false, '微信验证失败');
+        }
+
+        $openId = ArrayHelper::getValue($userWechatInfo, 'openid');
+        $userId = User::getId($openId);
+        if(!$userId) {
+            User::register($openId);
+            $userId = User::getId($openId);
+        }
+
+        $accessToken = Security::generateAccessToken($userId);
+        return $this->returnJson(['access_token' => $accessToken], true);
     }
     
 }

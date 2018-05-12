@@ -1,6 +1,7 @@
 <?php
 namespace app\helpers;
 
+use Firebase\JWT\JWT;
 use yii\helpers\ArrayHelper;
 
 /**

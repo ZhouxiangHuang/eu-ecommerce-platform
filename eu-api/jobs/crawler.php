@@ -29,3 +29,36 @@ $categories = [
     '内衣睡衣袜子' => ['文胸','内裤','泳装','睡衣','情趣内衣','袜子','汗衫','瘦身衣'],
 ];
 
+//        foreach ($categories as $key => $val) {
+//            $model = new ProductCategories();
+//            $model->name = $key;
+//            $model->type = 1;
+//            $model->parent_id = 0;
+//            $model->save();
+//            $parent = ProductCategories::findOne(['name' => $key]);
+//            $parentId = $parent->id;
+//            foreach ($val as $v => $t) {
+//                if(count($val[$v]) > 1) {
+//                    $model = new ProductCategories();
+//                    $model->name = $v;
+//                    $model->type = 2;
+//                    $model->parent_id = $parentId;
+//                    $model->save();
+//                    $p = ProductCategories::findOne(['name' => $v, 'parent_id' => $parentId]);
+//                    $pid = $p->id;
+//                    foreach($val[$v] as $type) {
+//                        $model = new ProductCategories();
+//                        $model->name = $type;
+//                        $model->type = 3;
+//                        $model->parent_id = $pid;
+//                        $model->save();
+//                    }
+//                } else {
+//                    $model = new ProductCategories();
+//                    $model->name = $t;
+//                    $model->type = 2;
+//                    $model->parent_id = $parentId;
+//                    $model->save();
+//                }
+//            }
+//        }

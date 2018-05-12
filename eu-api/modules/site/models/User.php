@@ -63,17 +63,14 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
-    static function findIdByMobile($mobile) {
-        $user = User::findOne(['mobile' => $mobile]);
+    static function getId($openId) {
+        $user = User::findOne(['wx_open_id' => $openId]);
         return $user->id;
     }
 
-    static function register($mobile, $role, $openId, $unionId) {
+    static function register($openId) {
         $user = new User();
-        $user->mobile = $mobile;
-        $user->role = $role;
         $user->wx_open_id = $openId;
-        $user->wx_union_id = $unionId;
         return $user->save();
     }
 
