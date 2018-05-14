@@ -16,7 +16,7 @@ class Security
         $accessToken = JWT::encode([
             'uid' => $user_id,
             'time' => time(),
-        ], file_get_contents(__DIR__ . "/../cert/private_key.pem"), 'RS256');
+        ], file_get_contents(__DIR__ . "/cert/private_key.pem"), 'RS256');
         
         return $accessToken;
     }

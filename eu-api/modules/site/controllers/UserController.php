@@ -60,17 +60,19 @@ class UserController extends BaseController
 
     public function actionLogin() {
         $code = Yii::$app->request->post('code');
+        $role = Yii::$app->request->post('role');
         $userWechatInfo = WechatHelper::userInfo($code);
 
         if(!$userWechatInfo) {
             return $this->returnJson([], false, '微信验证失败');
         }
 
+        Yii::error($userWechatInfo);
         $openId = ArrayHelper::getValue($userWechatInfo, 'openid');
-        $userId = User::getId($openId);
+        $userId = User::getId($openId, $role);
         if(!$userId) {
-            User::register($openId);
-            $userId = User::getId($openId);
+            User::register($openId, $role);
+            $userId = User::getId($openId, $role);
         }
 
         $accessToken = Security::generateAccessToken($userId);

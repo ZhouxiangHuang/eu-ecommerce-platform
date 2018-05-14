@@ -13,6 +13,7 @@ use app\modules\site\models\Products;
 use app\modules\site\models\User;
 use app\modules\site\ProductFactory;
 use Yii;
+use yii\web\UploadedFile;
 
 class ProductController extends BaseController
 {
@@ -46,6 +47,15 @@ class ProductController extends BaseController
 
         $products = Products::all($merchant_id);
         $this->returnJson($products, true);
+    }
+
+    public function actionUpload() {
+        Yii::error($_FILES['file']['tmp_name']);
+        Yii::error($_FILES['file']['name']);
+
+        $contentUploaded = UploadedFile::getInstanceByName('file');
+        $contentUploaded->saveAs('/tmp/' . $_FILES['file']['name']);
+        
     }
 
 }

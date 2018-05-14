@@ -36,10 +36,11 @@ class User extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['wx_union_id', 'wx_open_id', 'role', 'mobile', 'wechat_profile'], 'required'],
+            [['wx_open_id', 'role'], 'required'],
             [['role'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['wx_union_id', 'wx_open_id', 'mobile'], 'string', 'max' => 18],
+            [['wx_union_id', 'wx_open_id'], 'string', 'max' => 30],
+            [['mobile'], 'string', 'max' => 18],
             [['country'], 'string', 'max' => 10],
             [['wechat_profile'], 'string', 'max' => 30],
         ];
@@ -63,15 +64,27 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
-    static function getId($openId) {
-        $user = User::findOne(['wx_open_id' => $openId]);
-        return $user->id;
+    static function getId($openId, $role) {
+        $user = User::findOne(['wx_open_id' => $openId, 'role' => $role]);
+        return $user ? $user->id : false;
     }
 
-    static function register($openId) {
+    static function register($openId, $role) {
         $user = new User();
+
+        Yii::error($openId);
+
+
         $user->wx_open_id = $openId;
-        return $user->save();
+        $user->role = $role;
+        $user->save();
+
+        if($user->errors) {
+            Yii::error($user->errors);
+            return false;
+        } else {
+            return true;
+        }
     }
 
     static function isValid($mobile) {

@@ -31,7 +31,7 @@ class WechatHelper
 
     public static function userInfo($code, $refresh = false)
     {
-        $response = \Requests::get("https://api.weixin.qq.com/sns/jscode2session?appid=". 'wxe2192bf1c03375fe' ."&secret=".'fbe134eca96b3a9ad1d6b128a6404ed'."&grant_type=client_credential&js_code=" .$code);
+        $response = \Requests::get("https://api.weixin.qq.com/sns/jscode2session?appid=". 'wxe2192bf1c03375fe' ."&secret=".'fbe134eca96b3a9ad1d6b128a6404ed8'."&grant_type=client_credential&js_code=" .$code);
         $response = json_decode($response->body, true);
 
         if(isset($response['errcode'])) {
