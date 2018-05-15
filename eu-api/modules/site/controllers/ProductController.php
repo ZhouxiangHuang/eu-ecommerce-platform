@@ -9,6 +9,7 @@
 namespace app\modules\site\controllers;
 
 
+use app\common\DataSource;
 use app\modules\site\models\Products;
 use app\modules\site\models\User;
 use app\modules\site\ProductFactory;
@@ -20,19 +21,17 @@ class ProductController extends BaseController
     public function actionCreate() {
 
         $form = [
+            'file_name' => Yii::$app->request->post('file_name'),
             'type' => Yii::$app->request->post('type'),
             'price' => Yii::$app->request->post('price'),
             'code' => Yii::$app->request->post('code'),
             'hot' =>  Yii::$app->request->post('hot'),
-            'description' => Yii::$app->request->post('description')
+            'description' => Yii::$app->request->post('description'),
+            'image_only' => Yii::$app->request->post('image_only')
         ];
 
-        $result = ProductFactory::create($form);
-        if($result) {
-            $this->returnJson([], true);
-        } else {
-            $this->returnJson([], false);
-        }
+        $isSuccess = ProductFactory::create($form);
+        return $this->returnJson([], $isSuccess);
     }
 
     public function actionDetail($product_id) {
@@ -49,13 +48,20 @@ class ProductController extends BaseController
         $this->returnJson($products, true);
     }
 
-    public function actionUpload() {
-        Yii::error($_FILES['file']['tmp_name']);
-        Yii::error($_FILES['file']['name']);
-
-        $contentUploaded = UploadedFile::getInstanceByName('file');
-        $contentUploaded->saveAs('/tmp/' . $_FILES['file']['name']);
-        
-    }
+//    public function actionUpload() {
+//        $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+//        $dateTime = time() . rand(111, 999);
+//        $name = 'wx_' . $dateTime . '.' . $ext;
+//
+//        $contentUploaded = UploadedFile::getInstanceByName('file');
+//        $contentUploaded->saveAs($path = '/tmp/' . $name);
+//
+//        $dataSource = new DataSource();
+//        $isSuccess = $dataSource->storeImage($name, $path);
+//
+//        if($isSuccess) {
+//            unlink($path);
+//        }
+//    }
 
 }

@@ -6,7 +6,7 @@ use yii\db\mysql\Schema;
 /**
  * Class m180501_135338_createProduct
  */
-class m180501_135338_createProduct extends Migration
+class m180501_135339_createProduct extends Migration
 {
     /**
      * {@inheritdoc}
@@ -27,6 +27,7 @@ class m180501_135338_createProduct extends Migration
             'cover_image' => $this->integer()->comment('封面图'),
             'hot_item' => $this->boolean()->defaultValue(0)->comment('是否热销'),
             'description' => $this->string(200)->comment('简介'),
+            'status' => $this->integer(2)->comment('状态'),
             'created_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP COMMENT "创建时间"',
             'updated_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新时间"',
         ], $tableOptions);
