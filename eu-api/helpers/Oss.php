@@ -8,10 +8,10 @@
 
 namespace app\helpers;
 
-
 use OSS\Core\OssException;
 use OSS\OssClient;
 
+require __DIR__ . '/aliyun-oss-php-sdk-2.3.0/src/OSS/OssClient.php';
 class Oss
 {
     private $bucket;
@@ -40,5 +40,17 @@ class Oss
             return false;
         }
         return true;
+    }
+
+    public function getUrl($uniqueName, $time) {
+        $ossClient = new OssClient($this->accessId, $this->accessKey, $this->endpoint);
+
+        try{
+            return $ossClient->signUrl($this->bucket, $uniqueName, $time);
+        } catch(OssException $e) {
+            \Yii::error(__FUNCTION__ . ": FAILED\n");
+            \Yii::error($e->getMessage() . "\n");
+            return false;
+        }
     }
 }

@@ -1,8 +1,10 @@
 <?php
 
 namespace app\modules\site\controllers;
+date_default_timezone_set("Asia/Shanghai");
 
 use app\modules\site\models\User;
+use Firebase\JWT\JWT;
 use Yii;
 use yii\base\Model;
 use yii\data\Pagination;

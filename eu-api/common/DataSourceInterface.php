@@ -11,5 +11,5 @@ namespace app\common;
 
 interface DataSourceInterface
 {
-    public function storeImage($name, $path);
+    public function storeImage($fileName);
 }

@@ -2,7 +2,10 @@
 
 namespace app\modules\site\models;
 
+use app\common\DataSource;
+use app\helpers\Oss;
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "products".
@@ -21,6 +24,8 @@ use Yii;
  */
 class Products extends \yii\db\ActiveRecord
 {
+    public $img_urls = [];
+
     /**
      * @inheritdoc
      */
@@ -70,6 +75,32 @@ class Products extends \yii\db\ActiveRecord
 
     static function all($merchantId) {
         return Products::findAll(['merchant_id' => $merchantId]);
+    }
+
+    static function getByUniqueCode($code) {
+        return Products::findOne(['product_unique_code' => $code]);
+    }
+
+    public function addImage($fileName) {
+        $ext = pathinfo($_FILES[$fileName]['name'], PATHINFO_EXTENSION);
+        $dateTime = time() . rand(111, 999);
+        $name = 'wx_' . $dateTime . '.' . $ext;
+
+        $uploadedFile = UploadedFile::getInstanceByName($fileName);
+        $uploadedFile->saveAs($path = '/tmp/' . $name);
+
+        $oss = new Oss();
+        $isSuccess = $oss->putObject($name, $path);
+
+        if($isSuccess) {
+            unlink($path);
+            ProductImages::create($this->id, $name, 3600);
+        }
+    }
+
+    public function getImages() {
+        $urls = ProductImages::getImages($this->id);
+        return $urls;
     }
 
 }

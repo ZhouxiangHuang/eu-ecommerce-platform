@@ -8,18 +8,17 @@
 
 namespace app\modules\site\controllers;
 
-
-use app\common\DataSource;
 use app\modules\site\models\Products;
 use app\modules\site\models\User;
+use app\modules\site\models\UserCollections;
 use app\modules\site\ProductFactory;
+use app\modules\site\ProductManager;
 use Yii;
-use yii\web\UploadedFile;
 
 class ProductController extends BaseController
 {
-    public function actionCreate() {
 
+    public function actionCreate() {
         $form = [
             'file_name' => Yii::$app->request->post('file_name'),
             'type' => Yii::$app->request->post('type'),
@@ -27,16 +26,19 @@ class ProductController extends BaseController
             'code' => Yii::$app->request->post('code'),
             'hot' =>  Yii::$app->request->post('hot'),
             'description' => Yii::$app->request->post('description'),
-            'image_only' => Yii::$app->request->post('image_only')
+            'image_only' => Yii::$app->request->post('image_only'),
+            'merchant_id' => 1
         ];
 
-        $isSuccess = ProductFactory::create($form);
+        $productManager = new ProductManager();
+        $isSuccess = $productManager->createProduct($form);
+
         return $this->returnJson([], $isSuccess);
     }
 
     public function actionDetail($product_id) {
         $product = Products::detail($product_id);
-        $this->returnJson($product, true);
+        return $this->returnJson($product, true);
     }
 
     public function actionProducts() {
@@ -44,24 +46,21 @@ class ProductController extends BaseController
         $merchant = User::getMerchant($user->id);
         $merchant_id = $merchant->id;
 
-        $products = Products::all($merchant_id);
-        $this->returnJson($products, true);
+        $productManager = new ProductManager();
+        $products = $productManager->listProducts($merchant_id);
+
+        return $this->returnJson($products, true);
     }
 
-//    public function actionUpload() {
-//        $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-//        $dateTime = time() . rand(111, 999);
-//        $name = 'wx_' . $dateTime . '.' . $ext;
-//
-//        $contentUploaded = UploadedFile::getInstanceByName('file');
-//        $contentUploaded->saveAs($path = '/tmp/' . $name);
-//
-//        $dataSource = new DataSource();
-//        $isSuccess = $dataSource->storeImage($name, $path);
-//
-//        if($isSuccess) {
-//            unlink($path);
-//        }
-//    }
+    public function collect() {
+        $productId = Yii::$app->request->post('product_id');
+        $user = $this->getUserModel();
+        $isSuccess = UserCollections::add($user->id, $productId);
+        return $this->returnJson([], $isSuccess);
+    }
+
+    public function actionTest() {
+        return date('Y-m-d H:i:s', time());
+    }
 
 }
