@@ -21,6 +21,7 @@ class m180501_135340_createProduct extends Migration
         $this->createTable('{{%products}}', [
             'id' => $this->primaryKey(),
             'type' => $this->string(18)->notNull()->comment('产品种类'),
+            'name' => $this->string(18)->notNull()->comment('产品名称'),
             'price' => $this->integer(10)->notNull()->comment('价格'),
             'merchant_id' => $this->integer(10)->notNull()->comment('商户'),
             'product_unique_code' => $this->string(10)->notNull()->comment('编号'),

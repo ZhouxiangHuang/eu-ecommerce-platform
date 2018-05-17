@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $merchant_id
- * @property integer $name
+ * @property string $name
  * @property integer $status
  * @property string $created_at
  * @property string $updated_at
@@ -30,7 +30,7 @@ class MerchantCategories extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['merchant_id', 'name', 'status'], 'integer'],
+            [['merchant_id', 'status'], 'integer'],
             [['name'], 'required'],
             [['created_at', 'updated_at'], 'safe'],
         ];

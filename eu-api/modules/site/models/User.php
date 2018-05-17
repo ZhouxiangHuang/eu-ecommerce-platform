@@ -62,7 +62,11 @@ class User extends \yii\db\ActiveRecord
 
     static function getId($openId) {
         $user = User::findOne(['wx_open_id' => $openId]);
-        return $user->id;
+        if(!$user) {
+            return false;
+        } else {
+            return $user->id;
+        }
     }
 
     static function getMerchant($userId) {

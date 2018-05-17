@@ -12,6 +12,7 @@ use yii\web\UploadedFile;
  *
  * @property int $id
  * @property string $type 产品种类
+ * @property string $name 产品名称
  * @property int $price 价格
  * @property int $merchant_id 商户
  * @property string $product_unique_code 编号
@@ -108,6 +109,7 @@ class Products extends \yii\db\ActiveRecord
         $product = [
             'id' => $product->id,
             'price' => $product->price,
+            'name' => $product->name,
             'product_unique_code' => $product->product_unique_code,
             'hot_item' => $product->hot_item,
             'url' => $product->getImages()

@@ -71,6 +71,11 @@ class Merchants extends \yii\db\ActiveRecord
         $merchant->store_name = $storeName;
         $merchant->address = $address;
         $merchant->mobile = $mobile;
-        return $merchant->save();
+        $merchant->save();
+        if($merchant->errors) {
+            Yii::error($merchant->errors);
+            return false;
+        }
+        return true;
     }
 }

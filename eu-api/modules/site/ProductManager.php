@@ -29,8 +29,13 @@ class ProductManager
                 $product->price = ArrayHelper::getValue($form, 'price');
                 $product->hot_item = ArrayHelper::getValue($form, 'hot');
                 $product->description = ArrayHelper::getValue($form, 'description');
+                $product->type = ArrayHelper::getValue($form, 'type');
                 $product->status = 1;
                 $product->save();
+                if($product->errors) {
+                    Yii::error($product->errors);
+                    return true;
+                }
             }
 
             if($fileName =  ArrayHelper::getValue($form, 'file_name')) {

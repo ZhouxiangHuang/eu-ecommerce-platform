@@ -21,7 +21,7 @@ class m180516_131955_CreateMerchantCategories extends Migration
         $this->createTable('{{%merchant_categories}}', [
             'id' => $this->primaryKey(),
             'merchant_id' => $this->integer(10)->comment('产品id'),
-            'name' => $this->integer(10)->notNull()->comment('名称'),
+            'name' => $this->string(10)->notNull()->comment('名称'),
             'status' => $this->integer(2)->notNull()->defaultValue(1)->comment('是否显示'),
             'created_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP COMMENT "创建时间"',
             'updated_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新时间"',

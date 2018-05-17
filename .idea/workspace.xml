@@ -2,18 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61dfa135-1579-405f-93bf-0346d811ef44" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/eu-api/modules/site/models/User.php" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/eu-api/migrations/m180423_150528_CreateUserTable.php" afterPath="$PROJECT_DIR$/eu-api/migrations/m180424_150528_CreateUserTable.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/eu-api/migrations/m180501_135339_createProduct.php" afterPath="$PROJECT_DIR$/eu-api/migrations/m180501_135340_createProduct.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/migrations/m180501_135340_createProduct.php" afterPath="$PROJECT_DIR$/eu-api/migrations/m180501_135340_createProduct.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/migrations/m180516_131955_CreateMerchantCategories.php" afterPath="$PROJECT_DIR$/eu-api/migrations/m180516_131955_CreateMerchantCategories.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/ProductManager.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/ProductManager.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/controllers/BaseController.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/controllers/BaseController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/controllers/ProductController.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/controllers/ProductController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/controllers/UserController.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/controllers/UserController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/models/MerchantCategories.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/models/MerchantCategories.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/models/ProductCategories.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/models/ProductCategories.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/models/Products.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/models/Products.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/models/UserCollections.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/models/UserCollections.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/eu-api/modules/site/models/User.php" afterPath="$PROJECT_DIR$/eu-api/modules/site/models/User.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,64 +22,46 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="UserController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/UserController.php">
+      <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/ProductController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+            <state relative-caret-position="369">
+              <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
               <folding>
-                <element signature="e#46#71#0#PHP" expanded="true" />
+                <element signature="e#126#173#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/BaseController.php">
+      <file leaf-file-name="m180516_131955_CreateMerchantCategories.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180516_131955_CreateMerchantCategories.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="176" column="31" lean-forward="false" selection-start-line="176" selection-start-column="31" selection-end-line="176" selection-end-column="31" />
+            <state relative-caret-position="152">
+              <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/User.php">
+      <file leaf-file-name="ProductManager.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/ProductManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="64" column="25" lean-forward="false" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+            <state relative-caret-position="240">
+              <caret line="67" column="46" lean-forward="false" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseActiveRecord.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eu-api/vendor/yiisoft/yii2/db/BaseActiveRecord.php">
+      <file leaf-file-name="Products.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Products.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="104" column="27" lean-forward="false" selection-start-line="104" selection-start-column="27" selection-end-line="104" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Merchants.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="67" column="21" lean-forward="false" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="m180511_104134_CreateMerchantTable.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180511_104134_CreateMerchantTable.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-              <folding />
+            <state relative-caret-position="239">
+              <caret line="111" column="37" lean-forward="true" selection-start-line="111" selection-start-column="37" selection-end-line="111" selection-end-column="37" />
+              <folding>
+                <element signature="e#43#69#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -174,19 +153,19 @@
         <option value="$PROJECT_DIR$/eu-api/models/UserCollections.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/models/ProductCategories.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/models/UserCollections.php" />
-        <option value="$PROJECT_DIR$/eu-api/migrations/m180516_131955_CreateMerchantCategories.php" />
         <option value="$PROJECT_DIR$/eu-api/migrations/m180501_135339_createProduct.php" />
-        <option value="$PROJECT_DIR$/eu-api/migrations/m180501_135340_createProduct.php" />
-        <option value="$PROJECT_DIR$/eu-api/modules/site/models/Products.php" />
-        <option value="$PROJECT_DIR$/eu-api/modules/site/models/MerchantCategories.php" />
-        <option value="$PROJECT_DIR$/eu-api/modules/site/ProductManager.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/controllers/BaseController.php" />
-        <option value="$PROJECT_DIR$/eu-api/modules/site/controllers/ProductController.php" />
         <option value="$PROJECT_DIR$/eu-api/migrations/m180423_150528_CreateUserTable.php" />
         <option value="$PROJECT_DIR$/eu-api/migrations/m180424_150528_CreateUserTable.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/controllers/UserController.php" />
-        <option value="$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/models/User.php" />
+        <option value="$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php" />
+        <option value="$PROJECT_DIR$/eu-api/modules/site/ProductManager.php" />
+        <option value="$PROJECT_DIR$/eu-api/modules/site/controllers/ProductController.php" />
+        <option value="$PROJECT_DIR$/eu-api/modules/site/models/MerchantCategories.php" />
+        <option value="$PROJECT_DIR$/eu-api/migrations/m180516_131955_CreateMerchantCategories.php" />
+        <option value="$PROJECT_DIR$/eu-api/migrations/m180501_135340_createProduct.php" />
+        <option value="$PROJECT_DIR$/eu-api/modules/site/models/Products.php" />
       </list>
     </option>
   </component>
@@ -198,8 +177,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-220" />
-    <option name="y" value="-1058" />
+    <option name="x" value="-19" />
+    <option name="y" value="22" />
     <option name="width" value="1320" />
     <option name="height" value="815" />
   </component>
@@ -218,8 +197,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -332,6 +309,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -454,19 +433,20 @@
       <workItem from="1526387327766" duration="668000" />
       <workItem from="1526388212057" duration="6746000" />
       <workItem from="1526395410186" duration="7268000" />
-      <workItem from="1526450631453" duration="13656000" />
+      <workItem from="1526450631453" duration="13671000" />
+      <workItem from="1526567024435" duration="3866000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76967000" />
+    <option name="totallyTimeSpent" value="80848000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-220" y="-1058" width="1320" height="815" extended-state="0" />
+    <frame x="-19" y="22" width="1320" height="815" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="PlantUML" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29812208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39280125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -622,9 +602,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="39">
           <caret line="14" column="35" lean-forward="true" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-          <folding>
-            <element signature="e#28#48#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -690,7 +667,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -754,14 +730,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180501_135340_createProduct.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="28" column="60" lean-forward="true" selection-start-line="28" selection-start-column="60" selection-end-line="28" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180516_063957_CreateUserCollectionsTable.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
@@ -770,66 +738,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180516_131955_CreateMerchantCategories.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
-          <folding>
-            <element signature="e#7#28#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Products.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="106" column="20" lean-forward="false" selection-start-line="106" selection-start-column="20" selection-end-line="106" selection-end-column="20" />
-          <folding>
-            <element signature="e#43#69#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/MerchantCategories.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="10" column="33" lean-forward="false" selection-start-line="10" selection-start-column="21" selection-end-line="10" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/ProductController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1027">
-          <caret line="82" column="30" lean-forward="false" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
-          <folding>
-            <element signature="e#126#173#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/ProductManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="70" column="5" lean-forward="true" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
-          <folding>
-            <element signature="e#116#163#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180424_150528_CreateUserTable.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="331">
           <caret line="36" column="5" lean-forward="true" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/vendor/yiisoft/yii2/db/BaseActiveRecord.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="104" column="27" lean-forward="false" selection-start-line="104" selection-start-column="27" selection-end-line="104" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -858,14 +770,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180511_104134_CreateMerchantTable.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="22" column="20" lean-forward="true" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/BaseController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
@@ -874,29 +778,97 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/vendor/yiisoft/yii2/db/BaseActiveRecord.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="104" column="27" lean-forward="false" selection-start-line="104" selection-start-column="27" selection-end-line="104" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="67" column="21" lean-forward="false" selection-start-line="67" selection-start-column="21" selection-end-line="67" selection-end-column="21" />
+        <state relative-caret-position="335">
+          <caret line="78" column="20" lean-forward="false" selection-start-line="78" selection-start-column="20" selection-end-line="78" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="72" column="31" lean-forward="false" selection-start-line="72" selection-start-column="31" selection-end-line="72" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/UserController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="43" column="31" lean-forward="false" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+        <state relative-caret-position="324">
+          <caret line="50" column="27" lean-forward="true" selection-start-line="50" selection-start-column="27" selection-end-line="50" selection-end-column="27" />
           <folding>
             <element signature="e#46#71#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/User.php">
+    <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180511_104134_CreateMerchantTable.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="64" column="25" lean-forward="false" selection-start-line="64" selection-start-column="25" selection-end-line="64" selection-end-column="25" />
+        <state relative-caret-position="143">
+          <caret line="22" column="20" lean-forward="false" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180516_131955_CreateMerchantCategories.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="23" column="35" lean-forward="false" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180501_135340_createProduct.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="23" column="65" lean-forward="false" selection-start-line="23" selection-start-column="65" selection-end-line="23" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/ProductManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="67" column="46" lean-forward="false" selection-start-line="67" selection-start-column="46" selection-end-line="67" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Products.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="111" column="37" lean-forward="true" selection-start-line="111" selection-start-column="37" selection-end-line="111" selection-end-column="37" />
+          <folding>
+            <element signature="e#43#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/MerchantCategories.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="32" column="27" lean-forward="false" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="52" column="42" lean-forward="false" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+          <folding>
+            <element signature="e#126#173#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

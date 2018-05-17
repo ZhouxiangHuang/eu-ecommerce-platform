@@ -23,12 +23,12 @@ class ProductController extends BaseController
     public function actionCreate() {
         $form = [
             'file_name' => Yii::$app->request->post('file_name'),
+            'type' => Yii::$app->request->post('type'),
             'category_id' => Yii::$app->request->post('category_id'),
             'price' => Yii::$app->request->post('price'),
             'code' => Yii::$app->request->post('code'),
             'hot' =>  Yii::$app->request->post('hot'),
             'description' => Yii::$app->request->post('description'),
-            'image_only' => Yii::$app->request->post('image_only'),
             'merchant_id' => 1
         ];
 
@@ -45,9 +45,10 @@ class ProductController extends BaseController
     }
 
     public function actionProducts() {
-        $merchant = $this->getMerchantModel();
-        $merchant_id = $merchant->id;
+//        $merchant = $this->getMerchantModel();
+//        $merchant_id = $merchant->id;
 
+        $merchant_id = 1;
         $productManager = new ProductManager();
         $products = $productManager->listProducts($merchant_id);
 
@@ -73,13 +74,17 @@ class ProductController extends BaseController
         return json_encode($categories);
     }
 
-    public function actionAddMerchantCategories() {
+    public function actionAddMerchantCategory() {
         $name = Yii::$app->request->post('name');
-        $merchant = $this->getMerchantModel();
+//        $merchant = $this->getMerchantModel();
         $model = new MerchantCategories();
-        $model->merchant_id = $merchant->id;
+//        $model->merchant_id = $merchant->id;
+        $model->merchant_id = 1;
         $model->name = $name;
         $model->save();
+        if($model->errors) {
+            Yii::error($model->errors);
+        }
         return $this->returnJson([], $model->save());
     }
 
