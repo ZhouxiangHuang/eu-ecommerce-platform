@@ -172,6 +172,14 @@ class BaseController extends \yii\web\Controller
         }
     }
 
+    public function getMerchantModel() {
+        $userModel = $this->getUserModel();
+        $merchantModel = User::getMerchant($userModel->id);
+        if(!$merchantModel) {
+            throw new UnauthorizedHttpException("Not a merchant.");
+        }
+        return $merchantModel;
+    }
 
     protected function getErrorMessage(Model $model)
     {

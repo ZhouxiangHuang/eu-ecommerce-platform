@@ -8,7 +8,9 @@
 
 namespace app\modules\site;
 
+use app\modules\site\models\MerchantCategories;
 use app\modules\site\models\Products;
+use Yii;
 use yii\db\Exception;
 use yii\helpers\ArrayHelper;
 
@@ -21,7 +23,7 @@ class ProductManager
         try{
             if(!$product) {
                 $product = new Products();
-                $product->type = ArrayHelper::getValue($form, 'type');
+                $product->category_id = ArrayHelper::getValue($form, 'category_id');
                 $product->merchant_id = ArrayHelper::getValue($form, 'merchant_id');
                 $product->product_unique_code = $uniqueCode;
                 $product->price = ArrayHelper::getValue($form, 'price');
@@ -44,19 +46,28 @@ class ProductManager
 
     public function getProduct($productId) {
         $product = Products::findOne(['id' => $productId]);
-        $product->img_urls = $product->getImages();
-        return $product;
+        return Products::format($product);
     }
 
     public function listProducts($merchantId) {
+        $categories = MerchantCategories::findAll(['merchant_id' => $merchantId]);
         $products = Products::all($merchantId);
 
-        /** @var Products $product */
-        foreach ($products as $product) {
-            $urls = $product->getImages();
-            $product->img_urls = $urls;
+        $productArray = [];
+        foreach ($categories as $category) {
+            $tmpArray = [];
+            /** @var Products $product */
+            foreach ($products as $product) {
+                if($category->id == $product->category_id)
+                {
+                    $tmpArray[] = Products::format($product);
+                }
+
+                $productArray[] = [$category->name => $tmpArray];
+            }
         }
 
-        return $products;
+        return $productArray;
     }
+
 }

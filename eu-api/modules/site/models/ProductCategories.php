@@ -46,4 +46,20 @@ class ProductCategories extends \yii\db\ActiveRecord
             'parent_id' => 'Parent ID',
         ];
     }
+
+    static function getAll($parentId = 0) {
+        $products = ProductCategories::findAll(['parent_id' => $parentId]);
+
+        if(empty($products)) {
+            $category = ProductCategories::findOne(['id' => $parentId]);
+            return ['id' => $parentId, 'name' => $category->name];
+        } else {
+            $result = [];
+            foreach ($products as $product) {
+                $result[] = [$product->name => self::getAll($product->id)];
+            }
+            return $result;
+        }
+
+    }
 }

@@ -58,9 +58,9 @@ class UserCollections extends \yii\db\ActiveRecord
         return $model->save();
     }
 
-    static function cancel($userId, $productId) {
+    static function discard($userId, $productId) {
         $collection = UserCollections::findOne(['user_id' => $userId, 'product_id' => $productId]);
         $collection->status = 0;
-        return $collection;
+        return $collection->save();
     }
 }

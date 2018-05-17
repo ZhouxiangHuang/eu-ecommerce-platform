@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "merchants".
  *
  * @property int $id
+ * @property int $user_id 用户
  * @property string $store_name 商户名
  * @property string $open_at 开店时间
  * @property string $closed_at 关店时间
@@ -62,5 +63,14 @@ class Merchants extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    static function register($userId, $storeName, $address, $mobile) {
+        $merchant = new Merchants();
+        $merchant->user_id = $userId;
+        $merchant->store_name = $storeName;
+        $merchant->address = $address;
+        $merchant->mobile = $mobile;
+        return $merchant->save();
     }
 }

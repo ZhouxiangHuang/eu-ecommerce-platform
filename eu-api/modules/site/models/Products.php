@@ -18,13 +18,14 @@ use yii\web\UploadedFile;
  * @property int $cover_image 封面图
  * @property int $hot_item 是否热销
  * @property int $status 状态
+ * @property int $category_id 种类id
  * @property string $description 简介
  * @property string $created_at 创建时间
  * @property string $updated_at 更新时间
  */
 class Products extends \yii\db\ActiveRecord
 {
-    public $img_urls = [];
+    public $img_urls;
 
     /**
      * @inheritdoc
@@ -40,7 +41,7 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'price', 'merchant_id', 'product_unique_code'], 'required'],
+            [['price', 'merchant_id', 'product_unique_code'], 'required'],
             [['price', 'merchant_id', 'cover_image', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string', 'max' => 18],
@@ -103,4 +104,15 @@ class Products extends \yii\db\ActiveRecord
         return $urls;
     }
 
+    static function format(Products $product) {
+        $product = [
+            'id' => $product->id,
+            'price' => $product->price,
+            'product_unique_code' => $product->product_unique_code,
+            'hot_item' => $product->hot_item,
+            'url' => $product->getImages()
+        ];
+
+        return $product;
+    }
 }
