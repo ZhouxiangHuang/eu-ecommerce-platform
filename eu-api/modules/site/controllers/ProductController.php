@@ -71,7 +71,7 @@ class ProductController extends BaseController
 
     public function actionCategories() {
         $categories = ProductCategories::getAll();
-        return json_encode($categories);
+        return $this->returnJson($categories, true);
     }
 
     public function actionAddMerchantCategory() {
@@ -86,6 +86,47 @@ class ProductController extends BaseController
             Yii::error($model->errors);
         }
         return $this->returnJson([], $model->save());
+    }
+
+    public function actionMerchantCategories() {
+//        $merchant = $this->getMerchantModel();
+//        $model->merchant_id = $merchant->id;
+        $merchantId = 1;
+        $categories = MerchantCategories::all($merchantId);
+        $result = [];
+        foreach ($categories as $category) {
+            $result[] = ['id' => $category->id, 'name' => $category->name];
+        }
+
+        return $this->returnJson($result, true);
+    }
+
+    public function actionUpdateMerchantCategory() {
+        $form = Yii::$app->request->post('form');
+        //        $merchant = $this->getMerchantModel();
+//        $model->merchant_id = $merchant->id;
+        $merchant_id = 1;
+        foreach ($form as $categoryId => $val) {
+            $categoryModel = MerchantCategories::findOne(['id' => $categoryId]);
+            if(!$categoryModel) {
+                $categoryModel = new MerchantCategories();
+                $categoryModel->merchant_id = $merchant_id;
+            }
+            $categoryModel->name = $val;
+            $categoryModel->save();
+        }
+
+        //如果用户没有提交已存在的有效类别，代表类别已被删除
+        $categories = MerchantCategories::findAll(['merchant_id' => $merchant_id, 'status' => 1]);
+        foreach ($categories as $category) {
+            if(!array_key_exists($category->id, $form)){
+                $categoryModel = MerchantCategories::findOne(['id' => $category->id]);
+                $categoryModel->status = 0;
+                $categoryModel->save();
+            }
+        }
+
+        return $this->returnJson([], true);
     }
 
 }

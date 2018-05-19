@@ -50,4 +50,8 @@ class MerchantCategories extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    static function all($merchantId) {
+        return MerchantCategories::findAll(['merchant_id' => $merchantId, 'status' => 1]);
+    }
 }

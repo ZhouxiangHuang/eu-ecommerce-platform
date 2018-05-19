@@ -55,7 +55,7 @@ class ProductManager
     }
 
     public function listProducts($merchantId) {
-        $categories = MerchantCategories::findAll(['merchant_id' => $merchantId]);
+        $categories = MerchantCategories::all($merchantId);
         $products = Products::all($merchantId);
 
         $productArray = [];

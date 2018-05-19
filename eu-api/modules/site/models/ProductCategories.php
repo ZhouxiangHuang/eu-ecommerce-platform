@@ -52,11 +52,11 @@ class ProductCategories extends \yii\db\ActiveRecord
 
         if(empty($products)) {
             $category = ProductCategories::findOne(['id' => $parentId]);
-            return ['id' => $parentId, 'name' => $category->name];
+            return ['id' => $parentId, 'name' => $category->name, 'children' => []];
         } else {
             $result = [];
             foreach ($products as $product) {
-                $result[] = [$product->name => self::getAll($product->id)];
+                $result[] = ['children' => self::getAll($product->id), 'name' => $product->name, 'id' => $product->id];
             }
             return $result;
         }
