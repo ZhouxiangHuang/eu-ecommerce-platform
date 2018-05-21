@@ -6,7 +6,7 @@ use yii\db\mysql\Schema;
 /**
  * Class m180511_105847_CreateTagsTable
  */
-class m180511_110201_CreateMerchantTagsTable extends Migration
+class m180511_120204_CreateMerchantTagsTable extends Migration
 {
     /**
      * {@inheritdoc}
@@ -20,11 +20,14 @@ class m180511_110201_CreateMerchantTagsTable extends Migration
 
         $this->createTable('{{%merchants_tags}}', [
             'id' => $this->primaryKey(),
-            'tag_id' => $this->string(20)->notNull()->comment('商户名'),
-            'merchant_id' => $this->dateTime()->comment('开店时间'),
+            'tag_id' => $this->integer(11)->notNull()->comment('标签category'),
+            'merchant_id' => $this->integer(11)->comment('商户'),
+            'status' => $this->integer(2)->defaultValue(1)->comment('状态'),
             'created_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP COMMENT "创建时间"',
             'updated_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新时间"',
         ], $tableOptions);
+
+        $this->createIndex('tag', '{{%merchants_tags}}', ['merchant_id', 'tag_id']);
     }
 
     /**

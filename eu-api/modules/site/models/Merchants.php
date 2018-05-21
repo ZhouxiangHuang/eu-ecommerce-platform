@@ -41,7 +41,7 @@ class Merchants extends \yii\db\ActiveRecord
             [['country', 'city'], 'integer'],
             [['store_name'], 'string', 'max' => 20],
             [['address', 'announcement'], 'string', 'max' => 50],
-            [['mobile'], 'string', 'max' => 11],
+            [['mobile'], 'string', 'max' => 20],
         ];
     }
 
