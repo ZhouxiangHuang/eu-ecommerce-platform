@@ -49,4 +49,33 @@ class MerchantsTags extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    static function getTagIds($merchantId) {
+        $models = MerchantsTags::findAll(['merchant_id' => $merchantId, 'status' => 1]);
+        $result = [];
+
+        foreach ($models as $model) {
+            $result[] = $model->tag_id;
+        }
+
+        return $result;
+    }
+
+    static function getTagNames($merchantId) {
+        $models = MerchantsTags::findAll(['merchant_id' => $merchantId, 'status' => 1]);
+        $result = [];
+
+        foreach ($models as $model) {
+            $model = ProductCategories::findOne(['id' => $model->tag_id]);
+            $result[] = $model->name;
+        }
+
+        return $result;
+    }
+
+    static function getAllTags($merchantId) {
+        $models = MerchantsTags::findAll(['merchant_id' => $merchantId, 'status' => 1]);
+
+        return $models;
+    }
 }

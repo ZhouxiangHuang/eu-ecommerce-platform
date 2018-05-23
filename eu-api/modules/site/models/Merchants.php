@@ -12,8 +12,8 @@ use Yii;
  * @property string $store_name 商户名
  * @property string $open_at 开店时间
  * @property string $closed_at 关店时间
- * @property int $country 国家
- * @property int $city 城市
+ * @property string $country 国家
+ * @property string $city 城市
  * @property string $address 地址
  * @property string $mobile 联系电话
  * @property string $announcement 公告
@@ -38,7 +38,6 @@ class Merchants extends \yii\db\ActiveRecord
         return [
             [['store_name'], 'required'],
             [['open_at', 'closed_at', 'created_at', 'updated_at'], 'safe'],
-            [['country', 'city'], 'integer'],
             [['store_name'], 'string', 'max' => 20],
             [['address', 'announcement'], 'string', 'max' => 50],
             [['mobile'], 'string', 'max' => 20],

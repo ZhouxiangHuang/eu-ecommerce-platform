@@ -2,6 +2,8 @@
 namespace app\modules\site\controllers;
 use app\helpers\Security;
 use app\helpers\WechatHelper;
+use app\modules\site\models\Cities;
+use app\modules\site\models\Countries;
 use app\modules\site\models\Merchants;
 use app\modules\site\models\ProductCategories;
 use app\modules\site\models\Products;
@@ -51,8 +53,54 @@ class UserController extends BaseController
             Merchants::register($userId, $storeName, $address, $mobile);
         }
 
+        $merchant = User::getMerchant($userId);
+        $merchantId = ($merchant && $role == User::ROLE_MERCHANT)  ? $merchant->id : null;
+
         $accessToken = Security::generateAccessToken($userId);
-        return $this->returnJson(['access_token' => $accessToken], true);
+        return $this->returnJson(['access_token' => $accessToken, 'merchant_id' => $merchantId], true);
     }
-    
+
+    public function actionCountryCodes() {
+        $countries = Countries::find()->where(['>', 'id', 0])->all();
+        return $this->returnJson($countries, true);
+    }
+
+    public function actionRegions() {
+        $countries = Countries::find()->where(['>', 'id', 0])->all();
+        $regions = [];
+        foreach ($countries as $country) {
+            $countryArr = [];
+            $countryArr['name'] = $country->name;
+            $countryArr['country_code'] = $country->country_code;
+            $cities = Cities::findAll(['country_code' => $country->country_code]);
+            $countryArr['children'] = $cities;
+            $regions[] = $countryArr;
+        }
+
+        return $this->returnJson($regions, true);
+    }
+
+    public function actionValidate() {
+        $code = Yii::$app->request->post('code');
+        $userWechatInfo = WechatHelper::userInfo($code);
+        if(!$userWechatInfo) {
+            return $this->returnJson([], false, '微信验证失败');
+        }
+
+        $openId = ArrayHelper::getValue($userWechatInfo, 'openid');
+        $user = User::findOne(['wx_open_id' => $openId]);
+        if(!$user) {
+            return $this->returnJson([], false, '未注册用户');
+        }
+
+        $userId = $user->id;
+        $merchant = User::getMerchant($userId);
+        $isMerchant = $merchant !== null;
+        $accessToken = Security::generateAccessToken($userId);
+
+        $merchantId = $isMerchant ? $merchant->id : null;
+
+        return $this->returnJson(['access_token' => $accessToken, 'is_merchant' => $isMerchant, 'merchant_id' => $merchantId]);
+    }
+
 }
