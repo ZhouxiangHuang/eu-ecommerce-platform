@@ -55,14 +55,15 @@ class ProductController extends BaseController
         return $this->returnJson($products, true);
     }
 
-    public function collect() {
+    public function actionCollect() {
         $productId = Yii::$app->request->post('product_id');
         $user = $this->getUserModel();
+
         $isSuccess = UserCollections::add($user->id, $productId);
         return $this->returnJson([], $isSuccess);
     }
 
-    public function discard() {
+    public function actionDiscard() {
         $productId = Yii::$app->request->post('product_id');
         $user = $this->getUserModel();
         $isSuccess = UserCollections::discard($user->id, $productId);

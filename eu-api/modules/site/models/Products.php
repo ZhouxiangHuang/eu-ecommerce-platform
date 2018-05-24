@@ -112,7 +112,8 @@ class Products extends \yii\db\ActiveRecord
             'name' => $product->name,
             'product_unique_code' => $product->product_unique_code,
             'hot_item' => $product->hot_item,
-            'url' => $product->getImages()
+            'description' => $product->description,
+            'images' => $product->getImages()
         ];
 
         return $product;
