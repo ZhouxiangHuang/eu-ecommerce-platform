@@ -23,13 +23,13 @@ class ProductManager
         try{
             if(!$product) {
                 $product = new Products();
-                $product->category_id = ArrayHelper::getValue($form, 'category_id');
+                $product->merchant_category_id = ArrayHelper::getValue($form, 'merchant_category_id');
+                $product->name = ArrayHelper::getValue($form, 'name');
                 $product->merchant_id = ArrayHelper::getValue($form, 'merchant_id');
                 $product->product_unique_code = $uniqueCode;
                 $product->price = ArrayHelper::getValue($form, 'price');
                 $product->hot_item = ArrayHelper::getValue($form, 'hot');
                 $product->description = ArrayHelper::getValue($form, 'description');
-                $product->type = ArrayHelper::getValue($form, 'type');
                 $product->status = 1;
                 $product->save();
                 if($product->errors) {
@@ -59,16 +59,22 @@ class ProductManager
         $products = Products::all($merchantId);
 
         $productArray = [];
+        /** @var MerchantCategories $category */
         foreach ($categories as $category) {
             $tmpArray = [];
             /** @var Products $product */
             foreach ($products as $product) {
-                if($category->id == $product->category_id)
+                if($category->id == $product->merchant_category_id)
                 {
                     $tmpArray[] = Products::format($product);
                 }
 
                 $productArray[] = [$category->name => $tmpArray];
+            }
+
+            //如果没有产品，渲染类别
+            if(empty($products)) {
+                $productArray[] = [$category->name => []];
             }
         }
 

@@ -19,6 +19,11 @@ use yii\helpers\ArrayHelper;
 
 class MerchantController extends BaseController
 {
+    public function actionList() {
+        $merchants = Merchants::all();
+        return $this->returnJson($merchants);
+    }
+
     public function actionUpdate() {
         $name = Yii::$app->request->post('name');
         $start = Yii::$app->request->post('start');
@@ -30,10 +35,8 @@ class MerchantController extends BaseController
         $country = Yii::$app->request->post('country_code');
         $city = Yii::$app->request->post('city_code');
 
-//        $merchant = $this->getMerchantModel();
-
-        //save info
-        $merchant = Merchants::findOne(['id' => 1]);
+        /** @var Merchants $merchant */
+        $merchant = $this->getMerchantModel();
         $merchant->address = $address;
         $merchant->mobile = $mobile;
         $merchant->user_id = 1;
@@ -79,9 +82,7 @@ class MerchantController extends BaseController
     }
 
     public function actionDetail() {
-        //        $merchant = $this->getMerchantModel();
-        $merchantId = 1;
-        $merchant = Merchants::findOne(['id' => $merchantId]);
+        $merchant = $this->getMerchantModel();
         $array = [];
         $countryModel = Countries::findByCode($merchant->country);
         $cityModel = Cities::findByCode($merchant->city);
@@ -95,9 +96,23 @@ class MerchantController extends BaseController
         $array['city_code'] = $merchant->city;
         $array['address'] = $merchant->address;
         $array['region'] = ArrayHelper::getValue($countryModel, 'name') . '/' . ArrayHelper::getValue($cityModel, 'name');
-        $array['tags'] = MerchantsTags::getTagIds($merchantId);
-        $array['tag_names'] = MerchantsTags::getTagNames($merchantId);
+        $array['tags'] = MerchantsTags::getTagIds($merchant->id);
+        $array['tag_names'] = MerchantsTags::getTagNames($merchant->id);
 
         return $this->returnJson($array, true);
+    }
+
+    public function actionCategories() {
+        $merchant = $this->getMerchantModel();
+        $categories = MerchantCategories::all($merchant->id);
+        $result = [];
+        /** @var MerchantCategories $category */
+        foreach ($categories as $category) {
+            $model = [];
+            $model['id'] = $category->id;
+            $model['name'] = $category->name;
+            $result[] = $model;
+        }
+        return $this->returnJson($result);
     }
 }

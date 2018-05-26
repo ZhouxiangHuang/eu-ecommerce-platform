@@ -16,6 +16,7 @@ use Yii;
  * @property string $city 城市
  * @property string $address 地址
  * @property string $mobile 联系电话
+ * @property string $status 状态
  * @property string $announcement 公告
  * @property string $created_at 创建时间
  * @property string $updated_at 更新时间
@@ -70,11 +71,32 @@ class Merchants extends \yii\db\ActiveRecord
         $merchant->store_name = $storeName;
         $merchant->address = $address;
         $merchant->mobile = $mobile;
+        $merchant->status = 1;
         $merchant->save();
         if($merchant->errors) {
             Yii::error($merchant->errors);
             return false;
         }
         return true;
+    }
+
+    static function all() {
+        $merchants = Merchants::findAll(['status' => 1]);
+
+        $result = [];
+        foreach ($merchants as $merchant) {
+            $tags = MerchantsTags::getAllTagNames($merchant->id);
+
+            $merchantFormatted = [];
+            $merchantFormatted['id'] = $merchant->id;
+            $merchantFormatted['name'] = $merchant->store_name;
+            $merchantFormatted['address'] = $merchant->address;
+            $merchantFormatted['announcement'] = $merchant->announcement;
+            $merchantFormatted['tags'] = $tags;
+            $merchantFormatted['imageUrl'] = '/images/missgrace.jpeg';
+            $result[] = $merchantFormatted;
+        }
+
+        return $result;
     }
 }

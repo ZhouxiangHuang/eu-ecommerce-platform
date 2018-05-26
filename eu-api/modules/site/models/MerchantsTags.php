@@ -78,4 +78,15 @@ class MerchantsTags extends \yii\db\ActiveRecord
 
         return $models;
     }
+
+    static function getAllTagNames($merchantId) {
+        $models = MerchantsTags::findAll(['merchant_id' => $merchantId, 'status' => 1]);
+        $array = [];
+        foreach ($models as $model) {
+            $category = ProductCategories::findOne(['id' => $model->tag_id]);
+            $array[] = $category->name;
+        }
+
+        return $array;
+    }
 }

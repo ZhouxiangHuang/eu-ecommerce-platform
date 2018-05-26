@@ -23,8 +23,8 @@ class ProductController extends BaseController
     public function actionCreate() {
         $form = [
             'file_name' => Yii::$app->request->post('file_name'),
-            'type' => Yii::$app->request->post('type'),
-            'category_id' => Yii::$app->request->post('category_id'),
+            'name' => Yii::$app->request->post('name'),
+            'merchant_category_id' => Yii::$app->request->post('merchant_category_id'),
             'price' => Yii::$app->request->post('price'),
             'code' => Yii::$app->request->post('code'),
             'hot' =>  Yii::$app->request->post('hot'),
@@ -45,10 +45,8 @@ class ProductController extends BaseController
     }
 
     public function actionProducts() {
-//        $merchant = $this->getMerchantModel();
-//        $merchant_id = $merchant->id;
-
-        $merchant_id = 1;
+        $merchant = $this->getMerchantModel();
+        $merchant_id = $merchant->id;
         $productManager = new ProductManager();
         $products = $productManager->listProducts($merchant_id);
 
@@ -77,9 +75,8 @@ class ProductController extends BaseController
 
     public function actionAddMerchantCategory() {
         $name = Yii::$app->request->post('name');
-//        $merchant = $this->getMerchantModel();
+        $merchant = $this->getMerchantModel();
         $model = new MerchantCategories();
-//        $model->merchant_id = $merchant->id;
         $model->merchant_id = 1;
         $model->name = $name;
         $model->save();
@@ -90,9 +87,8 @@ class ProductController extends BaseController
     }
 
     public function actionMerchantCategories() {
-//        $merchant = $this->getMerchantModel();
-//        $model->merchant_id = $merchant->id;
-        $merchantId = 1;
+        $merchant = $this->getMerchantModel();
+        $merchantId = $merchant->id;
         $categories = MerchantCategories::all($merchantId);
         $result = [];
         foreach ($categories as $category) {
@@ -104,18 +100,9 @@ class ProductController extends BaseController
 
     public function actionUpdateMerchantCategory() {
         $form = Yii::$app->request->post('form');
-        //        $merchant = $this->getMerchantModel();
-//        $model->merchant_id = $merchant->id;
-        $merchant_id = 1;
-        foreach ($form as $categoryId => $val) {
-            $categoryModel = MerchantCategories::findOne(['id' => $categoryId]);
-            if(!$categoryModel) {
-                $categoryModel = new MerchantCategories();
-                $categoryModel->merchant_id = $merchant_id;
-            }
-            $categoryModel->name = $val;
-            $categoryModel->save();
-        }
+        $merchant = $this->getMerchantModel();
+        $merchant_id = $merchant->id;
+
 
         //如果用户没有提交已存在的有效类别，代表类别已被删除
         $categories = MerchantCategories::findAll(['merchant_id' => $merchant_id, 'status' => 1]);
@@ -125,6 +112,17 @@ class ProductController extends BaseController
                 $categoryModel->status = 0;
                 $categoryModel->save();
             }
+        }
+
+        foreach ($form as $categoryId => $val) {
+            //新添加的categoryId都是随机数
+            $categoryModel = MerchantCategories::findOne(['id' => $categoryId]);
+            if(!$categoryModel) {
+                $categoryModel = new MerchantCategories();
+                $categoryModel->merchant_id = $merchant_id;
+            }
+            $categoryModel->name = $val;
+            $categoryModel->save();
         }
 
         return $this->returnJson([], true);

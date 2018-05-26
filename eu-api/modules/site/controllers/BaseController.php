@@ -149,7 +149,7 @@ class BaseController extends \yii\web\Controller
         try {
             $accessToken = Yii::$app->request->headers->get("access-token");
             if ($accessToken && $accessToken !== "null") {
-                $decoded = JWT::decode($accessToken, file_get_contents(__DIR__ . "/../../api/cert/public_key.pem"), array('RS256'));
+                $decoded = JWT::decode($accessToken, file_get_contents(__DIR__ . "/../../../helpers/cert/public_key.pem"), array('RS256'));
                 $decoded_array = (array)$decoded;
                 if (ArrayHelper::getValue($decoded_array, "uid") && ArrayHelper::getValue($decoded_array, "time")) {
                     $userId = intval(ArrayHelper::getValue($decoded_array, "uid"));
@@ -157,7 +157,7 @@ class BaseController extends \yii\web\Controller
                     if ($static) {
                         return $static;
                     } else {
-                        throw new UnauthorizedHttpException("User is not exist.");
+                        throw new UnauthorizedHttpException("User does not exist.");
                     }
                 } else {
                     throw new UnauthorizedHttpException("Access Denied.");

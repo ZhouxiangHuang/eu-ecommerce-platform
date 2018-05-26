@@ -19,7 +19,7 @@ use yii\web\UploadedFile;
  * @property int $cover_image 封面图
  * @property int $hot_item 是否热销
  * @property int $status 状态
- * @property int $category_id 种类id
+ * @property int $merchant_category_id 种类id
  * @property string $description 简介
  * @property string $created_at 创建时间
  * @property string $updated_at 更新时间

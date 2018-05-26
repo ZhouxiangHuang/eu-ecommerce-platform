@@ -6,7 +6,7 @@ use yii\db\mysql\Schema;
 /**
  * Class m180511_104134_CreateMerchantTable
  */
-class m180511_104134_CreateMerchantTable extends Migration
+class m180511_104135_CreateMerchantTable extends Migration
 {
     /**
      * {@inheritdoc}
@@ -29,6 +29,7 @@ class m180511_104134_CreateMerchantTable extends Migration
             'address' => $this->string(50)->comment('地址'),
             'mobile' => $this->string(20)->comment('联系电话'),
             'announcement' => $this->string(50)->comment('公告'),
+            'status' => $this->string(3)->comment('状态'),
             'created_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP COMMENT "创建时间"',
             'updated_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新时间"',
         ], $tableOptions);
