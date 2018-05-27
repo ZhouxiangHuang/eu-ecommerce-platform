@@ -25,7 +25,7 @@ class MerchantController extends BaseController
     }
 
     public function actionUpdate() {
-        $name = Yii::$app->request->post('name');
+        $name = Yii::$app->request->post('store_name');
         $start = Yii::$app->request->post('start');
         $end = Yii::$app->request->post('end');
         $tags = Yii::$app->request->post('tags');
@@ -81,12 +81,13 @@ class MerchantController extends BaseController
         return $this->returnJson([], true);
     }
 
-    public function actionDetail() {
-        $merchant = $this->getMerchantModel();
+    public function actionDetail($merchant_id) {
+        $merchant = Merchants::findOne(['id' => $merchant_id]);
         $array = [];
         $countryModel = Countries::findByCode($merchant->country);
         $cityModel = Cities::findByCode($merchant->city);
         $array['store_name'] = $merchant->store_name;
+        $array['image_url'] = $merchant->getProfile();
         $array['open_at'] = $merchant->open_at;
         $array['closed_at'] = $merchant->closed_at;
         $array['mobile'] = $merchant->mobile;
@@ -114,5 +115,12 @@ class MerchantController extends BaseController
             $result[] = $model;
         }
         return $this->returnJson($result);
+    }
+
+    public function actionUploadProfile() {
+        /** @var Merchants $merchant */
+        $merchant = $this->getMerchantModel();
+        $isSuccess = $merchant->addProfile('file');
+        return $this->returnJson([], $isSuccess);
     }
 }

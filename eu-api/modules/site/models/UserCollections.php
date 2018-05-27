@@ -63,4 +63,35 @@ class UserCollections extends \yii\db\ActiveRecord
         $collection->status = 0;
         return $collection->save();
     }
+
+    static function all($userId) {
+        //TODO: need optimize
+        $collections = UserCollections::findAll(['user_id' => $userId, 'status' => 1]);
+        $collectionsArray = [];
+        foreach ($collections as $collection) {
+            $product = Products::findOne(['id' => $collection->product_id]);
+            $merchant = Merchants::findOne(['id' => $product->merchant_id]);
+            $productFormatted = Products::format($product);
+            $inArray = false;
+            foreach ($collectionsArray as $set) {
+                if($set['merchant_id'] == $merchant->id) {
+                    array_push($set['products'], $productFormatted);
+                    $inArray = true;
+                    continue;
+                }
+            }
+            //如果已经存在的商户，在上一个循环已经添加商品，可以直接跳过
+            if($inArray) {
+                continue;
+            } else {
+                $set = [];
+                $set['merchant_id'] = $merchant->id;
+                $set['merchant_name'] = $merchant->store_name;
+                $set['products'] = [$productFormatted]; //必须是数组，以便加入其它产品
+                $collectionsArray[] = $set;
+            }
+        }
+
+        return $collectionsArray;
+    }
 }

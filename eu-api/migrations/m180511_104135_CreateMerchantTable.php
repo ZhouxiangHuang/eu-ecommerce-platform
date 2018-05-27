@@ -29,6 +29,7 @@ class m180511_104135_CreateMerchantTable extends Migration
             'address' => $this->string(50)->comment('地址'),
             'mobile' => $this->string(20)->comment('联系电话'),
             'announcement' => $this->string(50)->comment('公告'),
+            'profile_img_name' => $this->string(200)->comment('OSS图片名'),
             'status' => $this->string(3)->comment('状态'),
             'created_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP COMMENT "创建时间"',
             'updated_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新时间"',

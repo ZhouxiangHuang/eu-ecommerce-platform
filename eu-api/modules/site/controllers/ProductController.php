@@ -44,13 +44,18 @@ class ProductController extends BaseController
         return $this->returnJson($product, true);
     }
 
-    public function actionProducts() {
-        $merchant = $this->getMerchantModel();
-        $merchant_id = $merchant->id;
+    public function actionProducts($merchant_id) {
         $productManager = new ProductManager();
         $products = $productManager->listProducts($merchant_id);
 
         return $this->returnJson($products, true);
+    }
+
+    public function actionCollections() {
+        $user = $this->getUserModel();
+        $collections = UserCollections::all($user->id);
+
+        return $this->returnJson($collections);
     }
 
     public function actionCollect() {
