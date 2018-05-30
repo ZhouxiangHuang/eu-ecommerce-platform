@@ -96,7 +96,8 @@ class Merchants extends \yii\db\ActiveRecord
             $merchantFormatted['address'] = $merchant->address;
             $merchantFormatted['announcement'] = $merchant->announcement;
             $merchantFormatted['tags'] = $tags;
-            $merchantFormatted['imageUrl'] = '/images/missgrace.jpeg';
+            $merchantFormatted['imageUrl'] = $merchant->getProfile();
+            $merchantFormatted['productImages'] = $merchant->getProductPeeks();
             $result[] = $merchantFormatted;
         }
 
@@ -133,7 +134,13 @@ class Merchants extends \yii\db\ActiveRecord
         $oss = new Oss();
         $url = $oss->getUrl($this->profile_img_name, 7200);
 
-        return $url ? $url : false;
+        return $url ? $url : null;
+    }
+
+    public function getProductPeeks() {
+        $product = Products::findOne(['merchant_id' => $this->id]);
+        $urls = $product->getImages();
+        return $urls;
     }
 
 }

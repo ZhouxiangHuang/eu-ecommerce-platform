@@ -1,7 +1,10 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
+
+//$db = require __DIR__ . '/test_db.php';
 $db = require __DIR__ . '/db.php';
+
 $modules = require __DIR__ . '/modules.php';
 
 $config = [
