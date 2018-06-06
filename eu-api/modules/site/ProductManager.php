@@ -17,25 +17,21 @@ use yii\helpers\ArrayHelper;
 class ProductManager
 {
     public function createProduct($form) {
-        $uniqueCode = ArrayHelper::getValue($form, 'code');
-        $product = Products::getByUniqueCode($uniqueCode);
 
         try{
-            if(!$product) {
-                $product = new Products();
-                $product->merchant_category_id = ArrayHelper::getValue($form, 'merchant_category_id');
-                $product->name = ArrayHelper::getValue($form, 'name');
-                $product->merchant_id = ArrayHelper::getValue($form, 'merchant_id');
-                $product->product_unique_code = $uniqueCode;
-                $product->price = ArrayHelper::getValue($form, 'price');
-                $product->hot_item = ArrayHelper::getValue($form, 'hot');
-                $product->description = ArrayHelper::getValue($form, 'description');
-                $product->status = 1;
-                $product->save();
-                if($product->errors) {
-                    Yii::error($product->errors);
-                    return true;
-                }
+            $product = new Products();
+            $product->merchant_category_id = ArrayHelper::getValue($form, 'merchant_category_id');
+            $product->name = ArrayHelper::getValue($form, 'name');
+            $product->merchant_id = ArrayHelper::getValue($form, 'merchant_id');
+            $product->product_unique_code = ArrayHelper::getValue($form, 'code');
+            $product->price = ArrayHelper::getValue($form, 'price');
+            $product->hot_item = ArrayHelper::getValue($form, 'hot');
+            $product->description = ArrayHelper::getValue($form, 'description');
+            $product->status = 1;
+            $product->save();
+            if($product->errors) {
+                Yii::error($product->errors);
+                return true;
             }
 
             if($fileName =  ArrayHelper::getValue($form, 'file_name')) {
@@ -49,6 +45,31 @@ class ProductManager
         }
     }
 
+    public function updateProduct($form) {
+        $productId = $form['product_id'];
+        $deletes = json_decode($form['delete_list']);
+
+        $product = Products::findOne(['id' => $productId]);
+        $product->merchant_category_id = ArrayHelper::getValue($form, 'merchant_category_id');
+        $product->name = ArrayHelper::getValue($form, 'name');
+        $product->merchant_id = ArrayHelper::getValue($form, 'merchant_id');
+        $product->product_unique_code = ArrayHelper::getValue($form, 'code');
+        $product->price = ArrayHelper::getValue($form, 'price');
+        $product->hot_item = ArrayHelper::getValue($form, 'hot');
+        $product->description = ArrayHelper::getValue($form, 'description');
+        if($fileName =  ArrayHelper::getValue($form, 'file_name')) {
+            $product->addImage($fileName);
+        }
+        $product->deleteImage($deletes);
+        $product->save();
+        if($product->errors) {
+            \Yii::error($product->errors);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function getProduct($productId) {
         $product = Products::findOne(['id' => $productId]);
         return Products::format($product);
@@ -58,23 +79,25 @@ class ProductManager
         $categories = MerchantCategories::all($merchantId);
         $products = Products::all($merchantId);
 
+        //TODO: need optimize
         $productArray = [];
         /** @var MerchantCategories $category */
         foreach ($categories as $category) {
-            $tmpArray = [];
-            /** @var Products $product */
-            foreach ($products as $product) {
-                if($category->id == $product->merchant_category_id)
-                {
-                    $tmpArray[] = Products::format($product);
+
+            if(count($products) > 0) {
+                $tmpArray = [];
+                /** @var Products $product */
+                foreach ($products as $product) {
+                    if($category->id == $product->merchant_category_id)
+                    {
+                        $tmpArray[] = Products::format($product);
+                    }
                 }
-
                 $productArray[] = [$category->name => $tmpArray];
-            }
-
-            //如果没有产品，渲染类别
-            if(empty($products)) {
+            } else {
+                //如果没有产品，渲染类别
                 $productArray[] = [$category->name => []];
+
             }
         }
 

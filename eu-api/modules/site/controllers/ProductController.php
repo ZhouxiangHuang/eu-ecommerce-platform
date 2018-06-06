@@ -29,11 +29,33 @@ class ProductController extends BaseController
             'code' => Yii::$app->request->post('code'),
             'hot' =>  Yii::$app->request->post('hot'),
             'description' => Yii::$app->request->post('description'),
-            'merchant_id' => 1
+            'merchant_id' => $this->getMerchantModel()->id
         ];
 
         $productManager = new ProductManager();
         $isSuccess = $productManager->createProduct($form);
+
+        return $this->returnJson([], $isSuccess);
+    }
+
+    public function actionUpdate() {
+        $form = [
+            'file_name' => Yii::$app->request->post('file_name'),
+            'name' => Yii::$app->request->post('name'),
+            'merchant_category_id' => Yii::$app->request->post('merchant_category_id'),
+            'price' => Yii::$app->request->post('price'),
+            'code' => Yii::$app->request->post('code'),
+            'hot' =>  Yii::$app->request->post('hot'),
+            'description' => Yii::$app->request->post('description'),
+            'merchant_id' => $this->getMerchantModel()->id,
+            'delete_list' => Yii::$app->request->post('delete_list'),
+            'product_id' => Yii::$app->request->post('product_id')
+        ];
+
+        Yii::error($form);
+
+        $productManager = new ProductManager();
+        $isSuccess = $productManager->updateProduct($form);
 
         return $this->returnJson([], $isSuccess);
     }

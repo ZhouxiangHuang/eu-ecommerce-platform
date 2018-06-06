@@ -103,4 +103,14 @@ class UserController extends BaseController
         return $this->returnJson(['access_token' => $accessToken, 'is_merchant' => $isMerchant, 'merchant_id' => $merchantId]);
     }
 
+    public function actionTelCodes() {
+        $codes = Countries::getTelCodes();
+        return $this->returnJson($codes);
+    }
+
+    public function actionTest() {
+        $code = 'vxvxvxvx';
+        $product = Products::findOne(['product_unique_code' => $code]);
+        return $product->name;
+    }
 }

@@ -39,7 +39,7 @@ class MerchantController extends BaseController
         $merchant = $this->getMerchantModel();
         $merchant->address = $address;
         $merchant->mobile = $mobile;
-        $merchant->user_id = 1;
+        $merchant->user_id = $this->getUserModel()->id;
         $merchant->announcement = $announcement;
         $merchant->open_at = $start;
         $merchant->closed_at = $end;

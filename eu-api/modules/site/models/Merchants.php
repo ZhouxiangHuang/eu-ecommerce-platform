@@ -139,8 +139,7 @@ class Merchants extends \yii\db\ActiveRecord
 
     public function getProductPeeks() {
         $product = Products::findOne(['merchant_id' => $this->id]);
-        $urls = $product->getImages();
-        return $urls;
+        return $product ? $product->getImages() : null;
     }
 
 }

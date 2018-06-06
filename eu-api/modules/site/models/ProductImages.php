@@ -10,6 +10,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $product_id
+ * @property integer $status
  * @property string $unique_name
  * @property string $url
  * @property string $expired_at
@@ -73,9 +74,15 @@ class ProductImages extends \yii\db\ActiveRecord
         }
     }
 
+    static function deleteImage($name) {
+        $image = ProductImages::findOne(['unique_name' => $name]);
+        $image->status = 0;
+        return $image->save();
+    }
+
     static function getImages($productId) {
-        $urls = [];
-        $images = ProductImages::findAll(['product_id' => $productId]);
+        $imagesArray = [];
+        $images = ProductImages::findAll(['product_id' => $productId, 'status' => 1]);
         foreach ($images as $model)
         {
             $isExpired = date('Y-m-d H:i:s', time()) > $model->expired_at;
@@ -85,9 +92,10 @@ class ProductImages extends \yii\db\ActiveRecord
                 $model->expired_at = date('Y-m-d H:i:s', time() + 3600);
                 $model->save();
             }
-            array_push($urls, $model->url);
+            $image = ['url' => $model->url, 'unique_name' => $model->unique_name];
+            array_push($imagesArray, $image);
         }
 
-        return $urls;
+        return $imagesArray;
     }
 }

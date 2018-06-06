@@ -48,4 +48,8 @@ class Countries extends \yii\db\ActiveRecord
     static function findByCode($code) {
         return Countries::findOne(['country_code' => $code]);
     }
+
+    static function getTelCodes() {
+        return Countries::find()->where(['>', 'id', 0])->select(['name', 'tel_code'])->all();
+    }
 }

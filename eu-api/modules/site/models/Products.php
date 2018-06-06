@@ -47,7 +47,6 @@ class Products extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string', 'max' => 18],
             [['product_unique_code'], 'string', 'max' => 10],
-            [['hot_item'], 'string', 'max' => 1],
             [['description'], 'string', 'max' => 200],
         ];
     }
@@ -80,10 +79,14 @@ class Products extends \yii\db\ActiveRecord
     }
 
     static function getByUniqueCode($code) {
-        return Products::findOne(['product_unique_code' => $code]);
+        $product = Products::findOne(['product_unique_code' => $code]);
+        return $product;
     }
 
     public function addImage($fileName) {
+        if(!isset($_FILES[$fileName])) {
+            return null;
+        }
         $ext = pathinfo($_FILES[$fileName]['name'], PATHINFO_EXTENSION);
         $dateTime = time() . rand(111, 999);
         $name = 'wx_' . $dateTime . '.' . $ext;
@@ -100,6 +103,16 @@ class Products extends \yii\db\ActiveRecord
         }
     }
 
+    public function deleteImage($uniqueNames) {
+        foreach ($uniqueNames as $name) {
+            $isSuccess = ProductImages::deleteImage($name);
+            if(!$isSuccess) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public function getImages() {
         $urls = ProductImages::getImages($this->id);
         return $urls;
@@ -113,6 +126,7 @@ class Products extends \yii\db\ActiveRecord
             'product_unique_code' => $product->product_unique_code,
             'hot_item' => $product->hot_item,
             'description' => $product->description,
+            'merchant_category_id' => $product->merchant_category_id,
             'images' => $product->getImages()
         ];
 
