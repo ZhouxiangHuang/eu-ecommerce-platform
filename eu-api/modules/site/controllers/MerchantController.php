@@ -57,8 +57,9 @@ class MerchantController extends BaseController
         $existingTagsModel = MerchantsTags::getAllTags($merchantId);
         $existingTags = [];
 
-        foreach ($existingTagsModel as $model) {
-            if(!in_array($model->tag_id, $tags)) {
+        foreach ($existingTagsModel as $array) {
+            $model = MerchantsTags::findOne(['id' => $array['id']]);
+            if(!in_array($array['tag_id'], $tags)) {
                 /** @var MerchantsTags $model */
                 $model->status = 0;
                 $model->save();
@@ -97,8 +98,7 @@ class MerchantController extends BaseController
         $array['city_code'] = $merchant->city;
         $array['address'] = $merchant->address;
         $array['region'] = ArrayHelper::getValue($countryModel, 'name') . '/' . ArrayHelper::getValue($cityModel, 'name');
-        $array['tags'] = MerchantsTags::getTagIds($merchant->id);
-        $array['tag_names'] = MerchantsTags::getTagNames($merchant->id);
+        $array['tags'] = MerchantsTags::getAllTags($merchant->id);
 
         return $this->returnJson($array, true);
     }

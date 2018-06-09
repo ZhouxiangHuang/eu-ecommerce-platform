@@ -52,10 +52,16 @@ class UserCollections extends \yii\db\ActiveRecord
     }
 
     static function add($userId, $productId){
-        $model = new UserCollections();
-        $model->product_id = $productId;
-        $model->user_id = $userId;
-        return $model->save();
+        $collected = UserCollections::findOne(['user_id' => $userId, 'product_id' => $productId, 'status' => 1]);
+
+        if(!$collected) {
+            $model = new UserCollections();
+            $model->product_id = $productId;
+            $model->user_id = $userId;
+            $model->save();
+        }
+
+        return true;
     }
 
     static function discard($userId, $productId) {

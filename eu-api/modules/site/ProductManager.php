@@ -46,10 +46,14 @@ class ProductManager
     }
 
     public function updateProduct($form) {
-        $productId = $form['product_id'];
+        $code = $form['code'];
         $deletes = json_decode($form['delete_list']);
+        $product = Products::findOne(['product_unique_code' => $code]);
 
-        $product = Products::findOne(['id' => $productId]);
+        if(!$product) {
+            return false;
+        }
+
         $product->merchant_category_id = ArrayHelper::getValue($form, 'merchant_category_id');
         $product->name = ArrayHelper::getValue($form, 'name');
         $product->merchant_id = ArrayHelper::getValue($form, 'merchant_id');
@@ -58,7 +62,10 @@ class ProductManager
         $product->hot_item = ArrayHelper::getValue($form, 'hot');
         $product->description = ArrayHelper::getValue($form, 'description');
         if($fileName =  ArrayHelper::getValue($form, 'file_name')) {
-            $product->addImage($fileName);
+            $isSuccess = $product->addImage($fileName);
+            if(!$isSuccess) {
+                return false;
+            }
         }
         $product->deleteImage($deletes);
         $product->save();

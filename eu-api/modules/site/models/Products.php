@@ -101,6 +101,8 @@ class Products extends \yii\db\ActiveRecord
             unlink($path);
             ProductImages::create($this->id, $name, 3600);
         }
+
+        return $isSuccess;
     }
 
     public function deleteImage($uniqueNames) {
