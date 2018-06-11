@@ -52,8 +52,6 @@ class ProductController extends BaseController
             'product_id' => Yii::$app->request->post('product_id')
         ];
 
-        Yii::error($form);
-
         $productManager = new ProductManager();
         $isSuccess = $productManager->updateProduct($form);
 
@@ -153,6 +151,15 @@ class ProductController extends BaseController
         }
 
         return $this->returnJson([], true);
+    }
+
+    public function actionDelete() {
+        $productId = Yii::$app->request->post('product_id');
+
+        $merchant = $this->getMerchantModel();
+        $isSuccess = Products::deleteOne($merchant->id, $productId);
+
+        return $this->returnJson([], $isSuccess);
     }
 
 

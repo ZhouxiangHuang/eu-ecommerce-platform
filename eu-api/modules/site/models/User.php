@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "users".
  *
  * @property integer $id
+ * @property integer $last_login_role
  * @property string $wx_union_id
  * @property string $wx_open_id
  * @property string $mobile
@@ -73,9 +74,16 @@ class User extends \yii\db\ActiveRecord
         return Merchants::findOne(['user_id' => $userId]);
     }
 
+    static function updateLastLoginRole($userId, $role) {
+        $user = User::findOne(['id' => $userId]);
+        $user->last_login_role = $role;
+        return $user->save();
+    }
+
     static function register($openId) {
         $user = new User();
         $user->wx_open_id = $openId;
+        $user->last_login_role = User::ROLE_COSTUMER;
         return $user->save();
     }
 }

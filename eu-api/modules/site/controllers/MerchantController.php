@@ -123,4 +123,9 @@ class MerchantController extends BaseController
         $isSuccess = $merchant->addProfile('file');
         return $this->returnJson([], $isSuccess);
     }
+
+    public function actionRegisteredCountries() {
+        $countries = Merchants::registeredCountries();
+        return $this->returnJson($countries);
+    }
 }

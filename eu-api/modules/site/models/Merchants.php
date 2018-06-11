@@ -104,6 +104,21 @@ class Merchants extends \yii\db\ActiveRecord
         return $result;
     }
 
+    static function registeredCountries() {
+        $merchants = Merchants::find()->where('id > 0')->groupBy('country')->select('country')->all();
+
+        $array = [];
+        /** @var Merchants $merchant */
+        foreach ($merchants as $merchant) {
+            $countryCode = $merchant->country;
+            $country = Countries::findOne(['country_code' => $countryCode]);
+            $name = $country->name;
+            array_push($array, ['code' => $countryCode, 'name' => $name]);
+        }
+
+        return $array;
+    }
+
     public function addProfile($fileName) {
         $ext = pathinfo($_FILES[$fileName]['name'], PATHINFO_EXTENSION);
         $dateTime = time() . rand(111, 999);
@@ -139,7 +154,7 @@ class Merchants extends \yii\db\ActiveRecord
 
     public function getProductPeeks() {
         $product = Products::findOne(['merchant_id' => $this->id]);
-        return $product ? $product->getImages() : null;
+        return $product ? $product->getImages(3) : null;
     }
 
 }

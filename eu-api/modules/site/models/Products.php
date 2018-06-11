@@ -75,7 +75,7 @@ class Products extends \yii\db\ActiveRecord
     }
 
     static function all($merchantId) {
-        return Products::findAll(['merchant_id' => $merchantId]);
+        return Products::findAll(['merchant_id' => $merchantId, 'status' => 1]);
     }
 
     static function getByUniqueCode($code) {
@@ -115,15 +115,25 @@ class Products extends \yii\db\ActiveRecord
         return true;
     }
 
-    public function getImages() {
+    public function getImages($limit = null) {
         $urls = ProductImages::getImages($this->id);
+        if($limit) {
+            return array_slice($urls, 0, $limit);
+        }
         return $urls;
+    }
+
+    static function deleteOne($merchantId, $productId) {
+        $model = Products::findOne(['merchant_id' => $merchantId, 'id' => $productId]);
+        $model->status = 0;
+        return $model->save();
     }
 
     static function format(Products $product) {
         $product = [
             'id' => $product->id,
             'price' => $product->price,
+            'merchant_id' => $product->merchant_id,
             'name' => $product->name,
             'product_unique_code' => $product->product_unique_code,
             'hot_item' => $product->hot_item,
