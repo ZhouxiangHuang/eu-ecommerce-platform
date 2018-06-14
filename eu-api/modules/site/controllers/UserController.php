@@ -5,6 +5,7 @@ use app\helpers\WechatHelper;
 use app\modules\site\models\Cities;
 use app\modules\site\models\Countries;
 use app\modules\site\models\Merchants;
+use app\modules\site\models\MerchantsTags;
 use app\modules\site\models\ProductCategories;
 use app\modules\site\models\Products;
 use app\modules\site\models\User;
@@ -116,8 +117,6 @@ class UserController extends BaseController
     }
 
     public function actionTest() {
-        $code = 'vxvxvxvx';
-        $product = Products::findOne(['product_unique_code' => $code]);
-        return $product->name;
+        return MerchantsTags::findTagRoot(24);
     }
 }

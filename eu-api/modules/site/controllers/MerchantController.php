@@ -9,18 +9,20 @@
 namespace app\modules\site\controllers;
 
 
+use app\helpers\Security;
 use app\modules\site\models\Cities;
 use app\modules\site\models\Countries;
 use app\modules\site\models\MerchantCategories;
 use app\modules\site\models\Merchants;
 use app\modules\site\models\MerchantsTags;
+use app\modules\site\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
 
 class MerchantController extends BaseController
 {
-    public function actionList() {
-        $merchants = Merchants::all();
+    public function actionList($page = 0, $country = null, $category = null) {
+        $merchants = Merchants::all($page, $country, $category);
         return $this->returnJson($merchants);
     }
 
@@ -127,5 +129,17 @@ class MerchantController extends BaseController
     public function actionRegisteredCountries() {
         $countries = Merchants::registeredCountries();
         return $this->returnJson($countries);
+    }
+
+    public function actionGenerateTestingMerchants() {
+        for($i = 0; $i < 50; $i++) {
+            $fakeUserId = time();
+            User::register($fakeUserId);
+            Merchants::register($fakeUserId, 'store' . $i, 'fake address', '1234567');
+        }
+    }
+
+    public function actionTest() {
+        return json_encode(MerchantsTags::findChildrenTags(1));
     }
 }

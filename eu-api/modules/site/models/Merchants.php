@@ -4,6 +4,7 @@ namespace app\modules\site\models;
 
 use app\helpers\Oss;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
 
 /**
@@ -26,6 +27,8 @@ use yii\web\UploadedFile;
  */
 class Merchants extends \yii\db\ActiveRecord
 {
+    const LIST_SIZE = 10;
+
     /**
      * @inheritdoc
      */
@@ -83,12 +86,34 @@ class Merchants extends \yii\db\ActiveRecord
         return true;
     }
 
-    static function all() {
-        $merchants = Merchants::findAll(['status' => 1]);
+    static function all($offset = 0, $country, $category) {
+        $queries = ['status' => 1];
+
+        if($country) {
+            $queries['country'] = $country;
+        }
+
+        if($category) {
+            $tagIds = MerchantsTags::findChildrenTags($category); //通过父类找出所有子类
+            $merchantIdsModel = MerchantsTags::find()->where(['tag_id' => $tagIds])->select('merchant_id')->all();
+            $ids = [];
+            /** @var MerchantsTags $model */
+            foreach ($merchantIdsModel as $model) {
+                array_push($ids, $model->merchant_id);
+            }
+            $queries['id'] = $ids;
+        }
+
+        $merchants = Merchants::find()
+            ->where($queries)
+            ->offset($offset * Merchants::LIST_SIZE)
+            ->limit(Merchants::LIST_SIZE)
+            ->all();
 
         $result = [];
+        /** @var Merchants $merchant */
         foreach ($merchants as $merchant) {
-            $tags = MerchantsTags::getAllTagNames($merchant->id);
+            $tags = MerchantsTags::getAllTags($merchant->id);
 
             $merchantFormatted = [];
             $merchantFormatted['id'] = $merchant->id;
@@ -98,6 +123,7 @@ class Merchants extends \yii\db\ActiveRecord
             $merchantFormatted['tags'] = $tags;
             $merchantFormatted['imageUrl'] = $merchant->getProfile();
             $merchantFormatted['productImages'] = $merchant->getProductPeeks();
+            $merchantFormatted['country'] = $merchant->country;
             $result[] = $merchantFormatted;
         }
 
@@ -112,8 +138,10 @@ class Merchants extends \yii\db\ActiveRecord
         foreach ($merchants as $merchant) {
             $countryCode = $merchant->country;
             $country = Countries::findOne(['country_code' => $countryCode]);
-            $name = $country->name;
-            array_push($array, ['code' => $countryCode, 'name' => $name]);
+            if($country) {
+                $name = $country->name;
+                array_push($array, ['code' => $countryCode, 'name' => $name]);
+            }
         }
 
         return $array;
@@ -156,5 +184,4 @@ class Merchants extends \yii\db\ActiveRecord
         $product = Products::findOne(['merchant_id' => $this->id]);
         return $product ? $product->getImages(3) : null;
     }
-
 }

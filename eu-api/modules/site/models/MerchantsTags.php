@@ -83,7 +83,8 @@ class MerchantsTags extends \yii\db\ActiveRecord
             $array = [
                 'id' => $model->id,
                 'name' => $name,
-                'tag_id' => $model->tag_id
+                'tag_id' => $model->tag_id,
+                'parent_id' => MerchantsTags::findTagRoot($tag->parent_id)
             ];
             array_push($tags, $array);
         }
@@ -100,5 +101,35 @@ class MerchantsTags extends \yii\db\ActiveRecord
         }
 
         return $array;
+    }
+
+    static function findTagRoot($tagId) {
+        $model = ProductCategories::findOne(['id' => $tagId]);
+        if($model->parent_id == 0) {
+            return $model->id;
+        } else {
+            return MerchantsTags::findTagRoot($model->parent_id);
+        }
+    }
+
+    //TODO: need optimize
+    static function findChildrenTags($parentId) {
+        $children = ProductCategories::findAll(['parent_id' => $parentId]);
+        if(empty($children)) {
+            return $parentId;
+        } else {
+            $result = [];
+            foreach ($children as $child) {
+                $childrenIds = MerchantsTags::findChildrenTags($child->id);
+                if(is_array($childrenIds)){
+                    foreach ($childrenIds as $childrenId) {
+                        array_push($result, $childrenId);
+                    }
+                } else {
+                    array_push($result, $childrenIds);
+                }
+            }
+            return $result;
+        }
     }
 }

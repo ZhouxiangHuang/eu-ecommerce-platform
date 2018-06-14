@@ -139,7 +139,8 @@ class Products extends \yii\db\ActiveRecord
             'hot_item' => $product->hot_item,
             'description' => $product->description,
             'merchant_category_id' => $product->merchant_category_id,
-            'images' => $product->getImages()
+            'images' => $product->getImages(),
+            'timestamp' => strtotime($product->created_at)
         ];
 
         return $product;
