@@ -1,7 +1,14 @@
 <?php
 
 $params = require __DIR__ . '/params.php';
-$db = require __DIR__ . '/db.php';
+
+if($_SERVER['APP_ENV'] === "testing") {
+    $db = require __DIR__ . '/test_db.php';
+} elseif($_SERVER['APP_ENV'] === "production") {
+    $db = require __DIR__ . '/pro_db.php';
+} else {
+    $db = require __DIR__ . '/db.php';
+}
 
 $config = [
     'id' => 'basic-console',

@@ -94,11 +94,19 @@ namespace :deploy do
   desc 'Migration database'
   task :migrate do
     on roles(:all) do
-      # Your restart mechanism here, for example:
       puts "Migration database"
-      execute :sudo, fetch(:php_bin), "#{current_path}/yii", "migrate/up", "--interactive=0"
+      execute :sudo, "APP_ENV=" + fetch(:environment), fetch(:php_bin), "#{current_path}/yii", "migrate/up", "--interactive=0"
     end
   end
+  desc 'Delete Releases'
+  task :delete do
+      on roles(:all) do
+        puts "Deleting old files"
+        time = Time.new - (3600 * 24 * 5)
+        date = time.strftime("%Y%m%d")
+        execute :sudo, "rm -rf /data/website/omart/releases/" + date + "*"
+      end
+    end
   desc "Update vendor"
   task :update_vendor do
     on roles(:all) do
@@ -140,6 +148,7 @@ namespace :deploy do
   #before :started, :update_source
   after :publishing, :restart
   after :restart, :migrate
+  after :migrate, :delete
   #after :finishing, :restart_php
 
   after :restart, :clear_cache do

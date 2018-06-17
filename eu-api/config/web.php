@@ -2,8 +2,13 @@
 
 $params = require __DIR__ . '/params.php';
 
-//$db = require __DIR__ . '/test_db.php';
-$db = require __DIR__ . '/db.php';
+if(isProduction()) {
+    $db = require __DIR__ . '/pro_db.php';
+} elseif(isTesting()) {
+    $db = require __DIR__ . '/test_db.php';
+} else {
+    $db = require __DIR__ . '/db.php';
+}
 
 $modules = require __DIR__ . '/modules.php';
 

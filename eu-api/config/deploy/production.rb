@@ -5,12 +5,12 @@
 # property set.  Don't declare `role :all`, it's a meta role.
 
 #role :app, %w{deploy@example.com}
-role :www,  %w{ec2-user@54.255.142.105 ec2-user@13.250.39.216}
+role :www,  %w{root@49.51.170.232}
 #role :db,  %w{deploy@example.com}
 
-set :deploy_to, '/data/website/gre_core/'
+set :deploy_to, '/data/website/omart/'
 set :environment, "production"
-set :php_bin, "/data/php/bin/php"
+set :php_bin, "/data/php56/bin/php"
 
 # Extended Server Syntax
 # ======================
