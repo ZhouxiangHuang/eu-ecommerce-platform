@@ -4,6 +4,7 @@ namespace app\modules\site\controllers;
 date_default_timezone_set("Asia/Shanghai");
 
 use app\modules\site\models\User;
+use Exception;
 use Firebase\JWT\JWT;
 use Yii;
 use yii\base\Model;
@@ -173,10 +174,14 @@ class BaseController extends \yii\web\Controller
     }
 
     public function getMerchantModel() {
-        $userModel = $this->getUserModel();
-        $merchantModel = User::getMerchant($userModel->id);
-        if(!$merchantModel) {
-            throw new UnauthorizedHttpException("Not a merchant.");
+        try {
+            $userModel = $this->getUserModel();
+            $merchantModel = User::getMerchant($userModel->id);
+            if(!$merchantModel) {
+                throw new UnauthorizedHttpException("Not a merchant.");
+            }
+        } catch (Exception $e) {
+            Yii::error($e->getMessage());
         }
         return $merchantModel;
     }

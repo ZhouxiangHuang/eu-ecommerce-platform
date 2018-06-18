@@ -70,6 +70,10 @@ class User extends \yii\db\ActiveRecord
         }
     }
 
+    /**
+     * @param $userId
+     * @return Merchants $merchant
+     */
     static function getMerchant($userId) {
         return Merchants::findOne(['user_id' => $userId]);
     }

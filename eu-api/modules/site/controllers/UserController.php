@@ -101,14 +101,17 @@ class UserController extends BaseController
         $accessToken = Security::generateAccessToken($userId);
 
         $merchantId = $isMerchant ? $merchant->id : null;
+        $merchantProfile = $isMerchant ? $merchant->getProfile() : null;
+        $merchantName = $isMerchant ? $merchant->store_name : null;
 
-        return $this->returnJson(
-            ['access_token' => $accessToken,
-            'has_merchant_id' => $isMerchant,
-            'merchant_id' => $merchantId,
-            'last_login_role' => $user->last_login_role
-            ]
-        );
+        return $this->returnJson([
+                'access_token' => $accessToken,
+                'has_merchant_id' => $isMerchant,
+                'merchant_id' => $merchantId,
+                'last_login_role' => $user->last_login_role,
+                'profile' => $merchantProfile,
+                'store_name' => $merchantName
+            ]);
     }
 
     public function actionTelCodes() {
