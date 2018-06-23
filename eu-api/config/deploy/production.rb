@@ -6,6 +6,7 @@
 
 #role :app, %w{deploy@example.com}
 role :www,  %w{root@49.51.170.232}
+role :www,  %w{root@111.231.52.153}
 #role :db,  %w{deploy@example.com}
 
 set :deploy_to, '/data/website/omart/'

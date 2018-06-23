@@ -85,27 +85,43 @@ class ProductManager
     public function listProducts($merchantId) {
         $categories = MerchantCategories::all($merchantId);
         $products = Products::all($merchantId);
+        $productArray = [];
+
+        //添加热卖列表
+        $productList = [];
+        foreach ($products as $product) {
+            if ($product->hot_item) {
+                $productList[] = Products::format($product);
+            }
+        }
+        $productArray[] = [
+            'id' => 0,
+            'name' => '热卖',
+            'products' => $productList,
+            'is_hot' => true
+        ];
+
+        //add hot_item category
+        /** @var Products $product */
 
         //TODO: need optimize
-        $productArray = [];
         /** @var MerchantCategories $category */
         foreach ($categories as $category) {
-
-            if(count($products) > 0) {
-                $tmpArray = [];
-                /** @var Products $product */
-                foreach ($products as $product) {
-                    if($category->id == $product->merchant_category_id)
-                    {
-                        $tmpArray[] = Products::format($product);
-                    }
+            $productList = [];
+            /** @var Products $product */
+            foreach ($products as $product) {
+                if($category->id == $product->merchant_category_id)
+                {
+                    $productList[] = Products::format($product);
                 }
-                $productArray[] = [$category->name => $tmpArray];
-            } else {
-                //如果没有产品，渲染类别
-                $productArray[] = [$category->name => []];
-
             }
+            $productArray[] = [
+                'id' => $category->id,
+                'name' => $category->name,
+                'products' => $productList,
+                'is_hot' => false
+            ];
+
         }
 
         return $productArray;

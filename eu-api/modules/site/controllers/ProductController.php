@@ -71,6 +71,9 @@ class ProductController extends BaseController
         return $this->returnJson($products, true);
     }
 
+    /**
+     * @throws \yii\base\Exception
+     */
     public function actionCollections() {
         $user = $this->getUserModel();
         $collections = UserCollections::all($user->id);
@@ -78,6 +81,9 @@ class ProductController extends BaseController
         return $this->returnJson($collections);
     }
 
+    /**
+     * @throws \yii\base\Exception
+     */
     public function actionCollect() {
         $productId = Yii::$app->request->post('product_id');
         $user = $this->getUserModel();
@@ -86,6 +92,9 @@ class ProductController extends BaseController
         return $this->returnJson([], $isSuccess);
     }
 
+    /**
+     * @throws \yii\base\Exception
+     */
     public function actionDiscard() {
         $productId = Yii::$app->request->post('product_id');
         $user = $this->getUserModel();
