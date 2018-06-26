@@ -181,7 +181,21 @@ class Merchants extends \yii\db\ActiveRecord
     }
 
     public function getProductPeeks() {
-        $product = Products::findOne(['merchant_id' => $this->id]);
-        return $product ? $product->getImages(3) : null;
+        $products = Products::find()->where(['merchant_id' => $this->id])->andWhere(['hot_item' => 1])->andWhere(['status' => 1])->limit(3)->all();
+
+        $images = [];
+        /** @var Products $product */
+        foreach ($products as $product) {
+            $image = $product->getImages(1);
+            $images = array_merge($images, $image);
+        }
+
+        if(count($products) < 3) {
+            for($i = 0; $i < 3 - count($products); $i ++) {
+                $images[] = ['url' => '/images/no-image-sm.png'];
+            }
+        }
+
+        return $images;
     }
 }

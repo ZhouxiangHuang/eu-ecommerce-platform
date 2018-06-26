@@ -21,6 +21,7 @@ class ProductController extends BaseController
 {
 
     public function actionCreate() {
+        $unique_code = Yii::$app->request->post('code');
         $form = [
             'file_name' => Yii::$app->request->post('file_name'),
             'name' => Yii::$app->request->post('name'),
@@ -34,8 +35,9 @@ class ProductController extends BaseController
 
         $productManager = new ProductManager();
         $isSuccess = $productManager->createProduct($form);
+        $product = Products::findOne(['product_unique_code' => $unique_code, 'merchant_id' => $this->getMerchantModel()->id]);
 
-        return $this->returnJson([], $isSuccess);
+        return $this->returnJson(['product_id' => $product->id], $isSuccess);
     }
 
     public function actionUpdate() {

@@ -25,6 +25,9 @@ class MerchantController extends BaseController
         return $this->returnJson($merchants);
     }
 
+    /**
+     * @throws \yii\base\Exception
+     */
     public function actionUpdate() {
         $name = Yii::$app->request->post('store_name');
         $start = Yii::$app->request->post('start');
@@ -139,6 +142,9 @@ class MerchantController extends BaseController
     }
 
     public function actionTest() {
-        return json_encode(MerchantsTags::findChildrenTags(1));
+        $merchant = Merchants::findOne(['id' => 51]);
+        $result = $merchant->getProductPeeks();
+
+        return $this->returnJson($result);
     }
 }
