@@ -23,6 +23,7 @@ class m180627_052703_CreateCurrencyTable extends Migration
             'abbreviation' => $this->string(10)->comment('汇率缩写'),
             'symbol' => $this->string(10)->notNull()->comment('符号'),
             'rate' => $this->integer(10)->notNull()->defaultValue(1)->comment('汇率（以欧元为准）'),
+            'status' => $this->integer(5)->notNull()->defaultValue(1)->comment('状态'),
             'created_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP COMMENT "创建时间"',
             'updated_at' => Schema::TYPE_TIMESTAMP . ' DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT "更新时间"',
         ], $tableOptions);

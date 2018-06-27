@@ -11,6 +11,7 @@ namespace app\modules\site\controllers;
 use app\helpers\Security;
 use app\modules\site\models\Cities;
 use app\modules\site\models\Countries;
+use app\modules\site\models\Currency;
 use app\modules\site\models\MerchantCategories;
 use app\modules\site\models\Merchants;
 use app\modules\site\models\MerchantsTags;
@@ -38,6 +39,7 @@ class MerchantController extends BaseController
         $address = Yii::$app->request->post('address');
         $country = Yii::$app->request->post('country_code');
         $city = Yii::$app->request->post('city_code');
+        $currencyId = Yii::$app->request->post('currency_id');
 
         /** @var Merchants $merchant */
         $merchant = $this->getMerchantModel();
@@ -50,6 +52,7 @@ class MerchantController extends BaseController
         $merchant->store_name = $name;
         $merchant->country = $country;
         $merchant->city = $city;
+        $merchant->currency_id = $currencyId;
         $merchant->save();
         if($merchant->errors) {
             Yii::error($merchant->errors);
@@ -101,6 +104,7 @@ class MerchantController extends BaseController
         $array['country_code'] = $merchant->country;
         $array['city_code'] = $merchant->city;
         $array['address'] = $merchant->address;
+        $array['currency'] = $merchant->getCurrency();
         $array['region'] = ArrayHelper::getValue($countryModel, 'name') . '/' . ArrayHelper::getValue($cityModel, 'name');
         $array['tags'] = MerchantsTags::getAllTags($merchant->id);
 
@@ -131,6 +135,11 @@ class MerchantController extends BaseController
     public function actionRegisteredCountries() {
         $countries = Merchants::registeredCountries();
         return $this->returnJson($countries);
+    }
+
+    public function actionCurrencies() {
+        $cuurentcies = Currency::findAll(['status' => 1]);
+        return $this->returnJson($cuurentcies);
     }
 
     public function actionGenerateTestingMerchants() {

@@ -11,6 +11,7 @@ use Yii;
  * @property string $abbreviation
  * @property string $symbol
  * @property integer $rate
+ * @property integer $status
  * @property string $created_at
  * @property string $updated_at
  */

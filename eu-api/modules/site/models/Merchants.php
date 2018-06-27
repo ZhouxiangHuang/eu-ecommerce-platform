@@ -16,6 +16,7 @@ use yii\web\UploadedFile;
  * @property string $open_at 开店时间
  * @property string $closed_at 关店时间
  * @property string $country 国家
+ * @property int $currency_id 货币单位
  * @property string $city 城市
  * @property string $address 地址
  * @property string $mobile 联系电话
@@ -197,5 +198,10 @@ class Merchants extends \yii\db\ActiveRecord
         }
 
         return $images;
+    }
+
+    public function getCurrency() {
+        $currencyModel = Currency::findOne(['id' => $this->currency_id]);
+        return $currencyModel->symbol;
     }
 }
