@@ -46,9 +46,9 @@ class ProductManager
     }
 
     public function updateProduct($form) {
-        $code = $form['code'];
+        $id = $form['product_id'];
         $deletes = json_decode($form['delete_list']);
-        $product = Products::findOne(['product_unique_code' => $code]);
+        $product = Products::findOne(['id' => $id]);
 
         if(!$product) {
             return false;

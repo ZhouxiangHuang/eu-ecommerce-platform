@@ -35,7 +35,12 @@ class ProductController extends BaseController
 
         $productManager = new ProductManager();
         $isSuccess = $productManager->createProduct($form);
-        $product = Products::findOne(['product_unique_code' => $unique_code, 'merchant_id' => $this->getMerchantModel()->id]);
+        /** @var Products $product */
+        $product = Products::find()
+            ->where(['merchant_id' => $this->getMerchantModel()->id])
+            ->andWhere(['product_unique_code' => $unique_code])
+            ->orderBy(['id' => SORT_DESC])
+            ->one();
 
         return $this->returnJson(['product_id' => $product->id], $isSuccess);
     }
