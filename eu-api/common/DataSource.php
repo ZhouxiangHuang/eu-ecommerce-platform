@@ -1,10 +1,8 @@
 <?php
 namespace app\common;
 use app\helpers\Oss;
+use common\modules\file_system\oss\OSSQiniuTool;
 use yii\web\UploadedFile;
-
-
-require_once __DIR__ . '/../helpers/aliyun-oss-php-sdk-2.3.0/src/OSS/OssClient.php';
 
 /**
  * Created by PhpStorm.
@@ -14,6 +12,14 @@ require_once __DIR__ . '/../helpers/aliyun-oss-php-sdk-2.3.0/src/OSS/OssClient.p
  */
 class DataSource implements DataSourceInterface
 {
+    /** @var Oss $oss */
+    private $oss;
+
+    public function __construct()
+    {
+        $this->oss = new OSS();
+    }
+
     public function storeImage($fileName)
     {
         $ext = pathinfo($_FILES[$fileName]['name'], PATHINFO_EXTENSION);
@@ -23,8 +29,7 @@ class DataSource implements DataSourceInterface
         $contentUploaded = UploadedFile::getInstanceByName($fileName);
         $contentUploaded->saveAs($path = '/tmp/' . $name);
 
-        $oss = new Oss();
-        $isSuccess = $oss->putObject($name, $path);
+        $isSuccess = $this->oss->putObject($name, $path);
 
         if($isSuccess) {
             unlink($path);
@@ -33,4 +38,21 @@ class DataSource implements DataSourceInterface
         return $isSuccess;
     }
 
+    public function storeQrCode($path , $name) {
+        if(!$name) {
+            $dateTime = time() . rand(111, 999);
+            $name = 'wx_' . $dateTime . '.jpg';
+        }
+
+        $isSuccess = $this->oss->putObject($name, $path);
+        if($isSuccess) {
+            unlink($path);
+        }
+
+        return $isSuccess;
+    }
+
+    public function getImageUrl($fileName) {
+        return $this->oss->getUrl($fileName);
+    }
 }

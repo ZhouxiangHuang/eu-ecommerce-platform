@@ -2,7 +2,9 @@
 
 namespace app\modules\site\models;
 
+use app\common\DataSource;
 use app\helpers\Oss;
+use app\helpers\WechatHelper;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\UploadedFile;
@@ -203,5 +205,27 @@ class Merchants extends \yii\db\ActiveRecord
     public function getCurrency() {
         $currencyModel = Currency::findOne(['id' => $this->currency_id]);
         return $currencyModel->symbol;
+    }
+
+    public function getQrCode() {
+        $this->id = 1;
+        $qrModel = MerchantQr::findOne(['merchant_id' => $this->id]);
+        $fileName = 'merchant_qr_' . $this->id . '.jpg';
+        $dataSource = new DataSource();
+        if(!$qrModel) {
+            $qrModel = new MerchantQr();
+            $path = WechatHelper::getMerchantQrCode($this->id);
+            $isSuccess = $dataSource->storeQrCode($path, $fileName);
+            if($isSuccess) {
+                $qrModel->merchant_id = $this->id;
+                $qrModel->profile_name = $fileName;
+                $qrModel->save();
+                if($qrModel->errors) {
+                    Yii::error($qrModel->errors);
+                }
+            }
+        }
+
+        return $dataSource->getImageUrl($fileName);
     }
 }

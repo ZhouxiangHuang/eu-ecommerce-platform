@@ -18,14 +18,15 @@ class WechatHelper
     {
         $cacheName = "WechatAccessToken";
         if ($accessToken = \Yii::$app->cache->get($cacheName) && !$refresh) {
-
+            $accessToken = \Yii::$app->cache->get($cacheName);
         } else {
-            $response = \Requests::get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" . \Yii::$app->params['wechat']["appid"] . "&secret=" . \Yii::$app->params['wechat']["secret"]);
+            $response = \Requests::get("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" . \Yii::$app->params['mp']['app_id'] . "&secret=" . \Yii::$app->params['mp']['secret']);
             $response = json_decode($response->body, true);
             $accessToken = $response["access_token"];
             \Yii::$app->cache->set($cacheName, $accessToken, 6000);
         }
 
+        \Yii::error($accessToken);
         return $accessToken;
     }
 
@@ -61,6 +62,25 @@ class WechatHelper
         }
 
         return $accessToken;
+    }
+
+    /**
+     * @return false|string
+     */
+    public static function getMerchantQrCode($merchantId) {
+        $header = [];
+        $data = [
+            'path' => "pages/product-list/product-list?merchantId=" . $merchantId,
+            'width' => 430
+        ];
+        $accessToken = self::accessToken();
+        $response = \Requests::post("https://api.weixin.qq.com/cgi-bin/wxaapp/createwxaqrcode?access_token=" . $accessToken, $header, json_encode($data));
+        $rawData = $response->body;
+
+        $path = 'merchant_qr_' . $merchantId;
+        file_put_contents($path, $rawData);
+
+        return $path;
     }
 
     /**

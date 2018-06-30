@@ -9,6 +9,7 @@
 namespace app\modules\site\controllers;
 
 use app\helpers\Security;
+use app\helpers\WechatHelper;
 use app\modules\site\models\Cities;
 use app\modules\site\models\Countries;
 use app\modules\site\models\Currency;
@@ -138,8 +139,16 @@ class MerchantController extends BaseController
     }
 
     public function actionCurrencies() {
-        $cuurentcies = Currency::findAll(['status' => 1]);
-        return $this->returnJson($cuurentcies);
+        $currencies = Currency::findAll(['status' => 1]);
+        return $this->returnJson($currencies);
+    }
+
+    public function actionShare() {
+//        $merchantModel = $this->getMerchantModel();
+
+        $merchantModel = new Merchants();
+        $qrCode = $merchantModel->getQrCode();
+        return $this->returnJson($qrCode);
     }
 
     public function actionGenerateTestingMerchants() {

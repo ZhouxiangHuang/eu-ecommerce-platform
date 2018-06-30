@@ -19,6 +19,8 @@ class Oss
     private $accessKey;
     private $endpoint;
 
+    private $client;
+
     function __construct()
     {
         $app = \Yii::$app;
@@ -26,14 +28,18 @@ class Oss
         $this->accessId = $app->params['oss']['access_id'];
         $this->accessKey = $app->params['oss']['key'];
         $this->endpoint = $app->params['oss']['endpoint'];
+
+        try {
+            $this->client = new OssClient($this->accessId, $this->accessKey, $this->endpoint);
+        } catch (OssException $e) {
+            \Yii::error($e->getMessage() . "\n");
+        }
     }
 
     public function putObject($uniqueName, $path) {
-        $ossClient = new OssClient($this->accessId, $this->accessKey, $this->endpoint);
-        $content = file_get_contents($path);
-
         try{
-            $ossClient->putObject($this->bucket, $uniqueName, $content);
+            $content = file_get_contents($path);
+            $this->client->putObject($this->bucket, $uniqueName, $content);
         } catch(OssException $e) {
             \Yii::error(__FUNCTION__ . ": FAILED\n");
             \Yii::error($e->getMessage() . "\n");
@@ -42,11 +48,9 @@ class Oss
         return true;
     }
 
-    public function getUrl($uniqueName, $time) {
-        $ossClient = new OssClient($this->accessId, $this->accessKey, $this->endpoint);
-
+    public function getUrl($uniqueName, $time = 3600) {
         try{
-            return $ossClient->signUrl($this->bucket, $uniqueName, $time);
+            return $this->client->signUrl($this->bucket, $uniqueName, $time);
         } catch(OssException $e) {
             \Yii::error(__FUNCTION__ . ": FAILED\n");
             \Yii::error($e->getMessage() . "\n");

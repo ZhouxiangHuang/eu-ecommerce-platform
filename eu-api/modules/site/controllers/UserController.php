@@ -9,6 +9,7 @@ use app\modules\site\models\MerchantsTags;
 use app\modules\site\models\ProductCategories;
 use app\modules\site\models\Products;
 use app\modules\site\models\User;
+use app\modules\site\models\UserCollections;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -112,6 +113,16 @@ class UserController extends BaseController
                 'profile' => $merchantProfile,
                 'store_name' => $merchantName
             ]);
+    }
+
+    /**
+     * @throws \yii\base\Exception
+     */
+    public function actionCollections() {
+        $user = $this->getUserModel();
+        $collections = UserCollections::all($user->id);
+
+        return $this->returnJson($collections);
     }
 
     public function actionTelCodes() {

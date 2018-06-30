@@ -81,16 +81,6 @@ class ProductController extends BaseController
     /**
      * @throws \yii\base\Exception
      */
-    public function actionCollections() {
-        $user = $this->getUserModel();
-        $collections = UserCollections::all($user->id);
-
-        return $this->returnJson($collections);
-    }
-
-    /**
-     * @throws \yii\base\Exception
-     */
     public function actionCollect() {
         $productId = Yii::$app->request->post('product_id');
         $user = $this->getUserModel();
