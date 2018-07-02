@@ -8,6 +8,7 @@
 
 namespace app\modules\site\controllers;
 
+use app\common\DataSource;
 use app\helpers\Security;
 use app\helpers\WechatHelper;
 use app\modules\site\models\Cities;
@@ -16,6 +17,7 @@ use app\modules\site\models\Currency;
 use app\modules\site\models\MerchantCategories;
 use app\modules\site\models\Merchants;
 use app\modules\site\models\MerchantsTags;
+use app\modules\site\models\Poster;
 use app\modules\site\models\User;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -145,10 +147,24 @@ class MerchantController extends BaseController
 
     public function actionShare() {
 //        $merchantModel = $this->getMerchantModel();
-
         $merchantModel = new Merchants();
         $qrCode = $merchantModel->getQrCode();
-        return $this->returnJson($qrCode);
+        $posterModel = Poster::findOne(['id' => 1]);
+        $dataSource = new DataSource();
+        $poster = [
+            'image_url' => $dataSource->getImageUrl($posterModel->image_url),
+            'image_scale_x' => $posterModel->image_scale_x,
+            'image_scale_y' => $posterModel->image_scale_y,
+            'image_pos_x' => $posterModel->image_pos_x,
+            'image_pos_y'=> $posterModel->image_pos_y,
+            'qr_url' => $qrCode,
+            'qr_pos_x' => $posterModel->qr_pos_x,
+            'qr_pos_y' => $posterModel->qr_pos_y,
+            'qr_scale_x' => $posterModel->qr_scale_x,
+            'qr_scale_y' => $posterModel->qr_scale_y,
+        ];
+
+        return $this->returnJson($poster);
     }
 
     public function actionGenerateTestingMerchants() {

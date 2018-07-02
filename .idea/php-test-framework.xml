@@ -5,7 +5,7 @@
       <tool tool_name="Codeception">
         <settings>
           <configurations>
-            <local_configuration executable_path="$PROJECT_DIR$/eu-api/codecept.phar" />
+            <local_configuration executable_path="$PROJECT_DIR$/eu-api/vendor/codeception/base/codecept" />
           </configurations>
         </settings>
       </tool>
@@ -16,7 +16,7 @@
       <tool tool_name="Codeception">
         <cache>
           <versions>
-            <info id="Local" version="2.4.3" />
+            <info id="Local" version="2.3.8" />
           </versions>
         </cache>
       </tool>
