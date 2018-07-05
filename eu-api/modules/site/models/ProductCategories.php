@@ -11,9 +11,11 @@ use Yii;
  * @property string $name 种类名
  * @property int $type
  * @property int $parent_id
+ * @property array $children
  */
 class ProductCategories extends \yii\db\ActiveRecord
 {
+    public $children = [];
     /**
      * @inheritdoc
      */
@@ -62,4 +64,45 @@ class ProductCategories extends \yii\db\ActiveRecord
         }
 
     }
+
+    static function getAllV2() {
+        $products = ProductCategories::find()->orderBy('parent_id desc')->all();
+        $productsArray = [];
+        foreach ($products as $product) {
+            /** @var ProductCategories $product */
+            $productsArray[] = [
+                'id' => $product->id,
+                'parent_id' => $product->parent_id,
+                'name' => $product->name,
+                'children' => [],
+            ];
+        }
+        return self::sortProducts($productsArray);
+    }
+
+    static function sortProducts($productCategories = []) {
+
+        $start = 0;
+        for($i = 0; $i < count($productCategories); $i++) {
+            $child = $i;
+            $cCategory = $productCategories[$child];
+            if($cCategory['parent_id'] == 0) {
+                $start = $i;
+                break;
+            }
+            for ($j = $i + 1; $j < count($productCategories); $j++) {
+                $parent = $j;
+                $pCategory = $productCategories[$parent];
+                if($cCategory['parent_id'] == $pCategory['id']) {
+                    $pCategory['children'][] = $cCategory;
+                    $productCategories[$parent] = $pCategory;
+                    break;
+                }
+            }
+
+        }
+
+        return array_slice($productCategories, $start);
+    }
+
 }

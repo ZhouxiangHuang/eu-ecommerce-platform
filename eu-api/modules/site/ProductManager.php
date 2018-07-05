@@ -112,7 +112,7 @@ class ProductManager
             foreach ($products as $product) {
                 if($category->id == $product->merchant_category_id)
                 {
-                    $productList[] = Products::format($product);
+                    array_unshift($productList, Products::format($product));
                 }
             }
             $productArray[] = [

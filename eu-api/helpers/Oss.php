@@ -24,10 +24,15 @@ class Oss
     function __construct()
     {
         $app = \Yii::$app;
-        $this->bucket = $app->params['oss']['bucket'];
+        if(isProduction()) {
+            $this->bucket = $app->params['oss']['production-bucket'];
+            $this->endpoint = $app->params['oss']['production-endpoint'];
+        } else {
+            $this->bucket = $app->params['oss']['test-bucket'];
+            $this->endpoint = $app->params['oss']['test-endpoint'];
+        }
         $this->accessId = $app->params['oss']['access_id'];
         $this->accessKey = $app->params['oss']['key'];
-        $this->endpoint = $app->params['oss']['endpoint'];
 
         try {
             $this->client = new OssClient($this->accessId, $this->accessKey, $this->endpoint);

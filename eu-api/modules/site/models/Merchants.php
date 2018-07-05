@@ -126,7 +126,8 @@ class Merchants extends \yii\db\ActiveRecord
             $merchantFormatted['tags'] = $tags;
             $merchantFormatted['imageUrl'] = $merchant->getProfile();
             $merchantFormatted['productImages'] = $merchant->getProductPeeks();
-            $merchantFormatted['country'] = $merchant->country;
+            $merchantFormatted['country'] = $merchant->getCountryName();
+            $merchantFormatted['city'] = $merchant->getCityName();
             $result[] = $merchantFormatted;
         }
 
@@ -183,6 +184,16 @@ class Merchants extends \yii\db\ActiveRecord
         return $url ? $url : null;
     }
 
+    public function getCountryName() {
+        $country = Countries::findOne(['country_code' => $this->country]);
+        return $country->name;
+    }
+
+    public function getCityName() {
+        $city = Cities::findOne(['city_code' => $this->city]);
+        return $city->name;
+    }
+
     public function getProductPeeks() {
         $products = Products::find()->where(['merchant_id' => $this->id])->andWhere(['hot_item' => 1])->andWhere(['status' => 1])->limit(3)->all();
 
@@ -208,7 +219,6 @@ class Merchants extends \yii\db\ActiveRecord
     }
 
     public function getQrCode() {
-        $this->id = 1;
         $qrModel = MerchantQr::findOne(['merchant_id' => $this->id]);
         $fileName = 'merchant_qr_' . $this->id . '.jpg';
         $dataSource = new DataSource();

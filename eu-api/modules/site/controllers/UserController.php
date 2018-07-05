@@ -22,13 +22,6 @@ use yii\helpers\ArrayHelper;
  */
 class UserController extends BaseController
 {
-//    public function actionRegister() {
-//        $code = Yii::$app->request->post('code');
-//        $userWechatInfo = WechatHelper::userInfo($code);
-//
-//        return $this->returnJson($userWechatInfo, true);
-//    }
-
     public function actionLogin() {
         $code = Yii::$app->request->post('code');
         $role = Yii::$app->request->post('role');
@@ -69,13 +62,18 @@ class UserController extends BaseController
     }
 
     public function actionRegions() {
-        $countries = Countries::find()->where(['>', 'id', 0])->all();
+        $countries = Countries::find()->all();
         $regions = [];
         foreach ($countries as $country) {
+            $cities = Cities::findAll(['country_code' => $country->country_code]);
+            $cities[] = [
+                'country_code' => $country->country_code,
+                'name' => '其他',
+                'city_code' => 'OTHER'
+            ];
             $countryArr = [];
             $countryArr['name'] = $country->name;
             $countryArr['country_code'] = $country->country_code;
-            $cities = Cities::findAll(['country_code' => $country->country_code]);
             $countryArr['children'] = $cities;
             $regions[] = $countryArr;
         }

@@ -145,12 +145,15 @@ class MerchantController extends BaseController
         return $this->returnJson($currencies);
     }
 
-    public function actionShare() {
-//        $merchantModel = $this->getMerchantModel();
-        $merchantModel = new Merchants();
+    public function actionShare($id=1) {
+        $merchantModel = $this->getMerchantModel();
         $qrCode = $merchantModel->getQrCode();
-        $posterModel = Poster::findOne(['id' => 1]);
+        $posterModel = Poster::findOne(['id' => $id]);
         $dataSource = new DataSource();
+
+        $count = Poster::find()->count();
+        $nextPosterId = ($id+1 > $count) ? 1 : $id+1;
+
         $poster = [
             'image_url' => $dataSource->getImageUrl($posterModel->image_url),
             'image_scale_x' => $posterModel->image_scale_x,
@@ -162,6 +165,7 @@ class MerchantController extends BaseController
             'qr_pos_y' => $posterModel->qr_pos_y,
             'qr_scale_x' => $posterModel->qr_scale_x,
             'qr_scale_y' => $posterModel->qr_scale_y,
+            'next_poster_id' => $nextPosterId
         ];
 
         return $this->returnJson($poster);

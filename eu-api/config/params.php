@@ -9,7 +9,9 @@ return [
     'oss' => [
         'access_id' => 'LTAInG2xLTHkZBur',
         'key' => 'UcRgxqyMWV4cOGzQMREOK4F1IFDe2X',
-        'bucket' => 'omart-test',
-        'endpoint' => 'oss-cn-beijing.aliyuncs.com'
+        'production-bucket' => 'omart-mp',
+        'production-endpoint' => 'oss-eu-central-1.aliyuncs.com',
+        'test-bucket' => 'omart-test',
+        'test-endpoint' => 'oss-cn-beijing.aliyuncs.com'
     ]
 ];

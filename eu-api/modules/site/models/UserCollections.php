@@ -52,20 +52,23 @@ class UserCollections extends \yii\db\ActiveRecord
     }
 
     static function add($userId, $productId){
-        $collected = UserCollections::findOne(['user_id' => $userId, 'product_id' => $productId, 'status' => 1]);
+        $collected = UserCollections::findOne(['user_id' => $userId, 'product_id' => $productId, 'status' => 0]);
 
         if(!$collected) {
             $model = new UserCollections();
             $model->product_id = $productId;
             $model->user_id = $userId;
             $model->save();
+        } else {
+            $collected->status = 1;
+            $collected->save();
         }
 
         return true;
     }
 
     static function discard($userId, $productId) {
-        $collection = UserCollections::findOne(['user_id' => $userId, 'product_id' => $productId]);
+        $collection = UserCollections::findOne(['user_id' => $userId, 'product_id' => $productId, 'status' => 1]);
         $collection->status = 0;
         return $collection->save();
     }
@@ -73,19 +76,22 @@ class UserCollections extends \yii\db\ActiveRecord
     static function all($userId) {
         //TODO: need optimize
         $collections = UserCollections::findAll(['user_id' => $userId, 'status' => 1]);
+
         $collectionsArray = [];
         foreach ($collections as $collection) {
             $product = Products::findOne(['id' => $collection->product_id]);
             $merchant = Merchants::findOne(['id' => $product->merchant_id]);
             $productFormatted = Products::format($product);
+
             $inArray = false;
-            foreach ($collectionsArray as $set) {
-                if($set['merchant_id'] == $merchant->id) {
-                    array_push($set['products'], $productFormatted);
+            for($i = 0; $i < count($collectionsArray); $i++) {
+                if($collectionsArray[$i]['merchant_id'] == $merchant->id) {
+                    array_push($collectionsArray[$i]['products'], $productFormatted);
                     $inArray = true;
-                    continue;
+                    break;
                 }
             }
+
             //如果已经存在的商户，在上一个循环已经添加商品，可以直接跳过
             if($inArray) {
                 continue;
@@ -100,4 +106,5 @@ class UserCollections extends \yii\db\ActiveRecord
 
         return $collectionsArray;
     }
+
 }

@@ -100,7 +100,8 @@ class ProductController extends BaseController
     }
 
     public function actionCategories() {
-        $categories = ProductCategories::getAll();
+//        $categories = ProductCategories::getAll();
+        $categories = ProductCategories::getAllV2();
         return $this->returnJson($categories, true);
     }
 
