@@ -8,6 +8,7 @@
 
 namespace app\modules\site\controllers;
 
+use app\helpers\Stats;
 use app\modules\site\models\MerchantCategories;
 use app\modules\site\models\ProductCategories;
 use app\modules\site\models\Products;
@@ -102,6 +103,7 @@ class ProductController extends BaseController
     public function actionCategories() {
 //        $categories = ProductCategories::getAll();
         $categories = ProductCategories::getAllV2();
+
         return $this->returnJson($categories, true);
     }
 

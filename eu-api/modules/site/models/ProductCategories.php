@@ -2,6 +2,7 @@
 
 namespace app\modules\site\models;
 
+use app\helpers\Stats;
 use Yii;
 
 /**
@@ -77,7 +78,19 @@ class ProductCategories extends \yii\db\ActiveRecord
                 'children' => [],
             ];
         }
-        return self::sortProducts($productsArray);
+
+        $sortedProduct = self::sortProducts($productsArray);
+        $merchInCategories = Stats::countMerchantsInCategories($sortedProduct);
+        for ($i = 0; $i < count($sortedProduct); $i++) {
+            $catId = $sortedProduct[$i]['id'];
+            if(array_key_exists($catId, $merchInCategories)) {
+                $sortedProduct[$i]['merchant_count'] = $merchInCategories[$catId];
+            } else {
+                $sortedProduct[$i]['merchant_count'] = 0;
+            }
+        }
+
+        return $sortedProduct;
     }
 
     static function sortProducts($productCategories = []) {
