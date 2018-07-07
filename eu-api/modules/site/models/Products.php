@@ -42,7 +42,7 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['price', 'merchant_id', 'product_unique_code'], 'required'],
+            [['merchant_id', 'product_unique_code'], 'required'],
             [['price', 'merchant_id', 'cover_image', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string', 'max' => 18],

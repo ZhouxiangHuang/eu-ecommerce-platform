@@ -99,6 +99,7 @@ class UserCollections extends \yii\db\ActiveRecord
                 $set = [];
                 $set['merchant_id'] = $merchant->id;
                 $set['merchant_name'] = $merchant->store_name;
+                $set['currency'] = $merchant->getCurrency();
                 $set['products'] = [$productFormatted]; //必须是数组，以便加入其它产品
                 $collectionsArray[] = $set;
             }
