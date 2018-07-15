@@ -165,6 +165,10 @@ class MerchantController extends BaseController
             'qr_pos_y' => $posterModel->qr_pos_y,
             'qr_scale_x' => $posterModel->qr_scale_x,
             'qr_scale_y' => $posterModel->qr_scale_y,
+            'font_color' => $posterModel->font_color,
+            'font_size' => $posterModel->font_size,
+            'font_x' => $posterModel->font_x,
+            'font_y' => $posterModel->font_y,
             'next_poster_id' => $nextPosterId
         ];
 

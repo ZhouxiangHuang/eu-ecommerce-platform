@@ -17,6 +17,10 @@ use Yii;
  * @property integer $qr_pos_y
  * @property integer $qr_scale_x
  * @property integer $qr_scale_y
+ * @property integer $font_color
+ * @property integer $font_size
+ * @property integer $font_x
+ * @property integer $font_y
  * @property string $created_at
  * @property string $updated_at
  */
