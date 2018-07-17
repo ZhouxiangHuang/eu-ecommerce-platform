@@ -94,23 +94,31 @@ class UserController extends BaseController
             return $this->returnJson([], false, '未注册用户');
         }
 
-        $userId = $user->id;
-        $merchant = User::getMerchant($userId);
-        $isMerchant = $merchant !== null;
-        $accessToken = Security::generateAccessToken($userId);
+        $accessToken = Security::generateAccessToken($user->id);
 
+        return $this->returnJson([
+                'access_token' => $accessToken
+            ]);
+    }
+
+    /**
+     * @throws \yii\base\Exception
+     */
+    public function actionDetail() {
+        $user = $this->getUserModel();
+        $merchant = User::getMerchant($user->id);
+        $isMerchant = $merchant !== null;
         $merchantId = $isMerchant ? $merchant->id : null;
         $merchantProfile = $isMerchant ? $merchant->getProfile() : null;
         $merchantName = $isMerchant ? $merchant->store_name : null;
 
         return $this->returnJson([
-                'access_token' => $accessToken,
-                'has_merchant_id' => $isMerchant,
-                'merchant_id' => $merchantId,
-                'last_login_role' => $user->last_login_role,
-                'profile' => $merchantProfile,
-                'store_name' => $merchantName
-            ]);
+            'has_merchant_id' => $isMerchant,
+            'merchant_id' => $merchantId,
+            'last_login_role' => $user->last_login_role,
+            'profile' => $merchantProfile,
+            'store_name' => $merchantName
+        ]);
     }
 
     /**

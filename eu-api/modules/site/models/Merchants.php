@@ -164,6 +164,7 @@ class Merchants extends \yii\db\ActiveRecord
 
         if($isSuccess) {
             unlink($path);
+            Yii::error($name);
             $this->profile_img_name = $name;
             $this->save();
             if($this->errors) {

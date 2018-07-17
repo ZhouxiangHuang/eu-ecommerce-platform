@@ -34,8 +34,10 @@ class Oss
         $this->accessId = $app->params['oss']['access_id'];
         $this->accessKey = $app->params['oss']['key'];
 
+        \Yii::error($this->bucket);
+
         try {
-            $this->client = new OssClient($this->accessId, $this->accessKey, $this->endpoint);
+            $this->client = new OssClient($this->accessId, $this->accessKey, $this->endpoint, true);
         } catch (OssException $e) {
             \Yii::error($e->getMessage() . "\n");
         }
@@ -55,6 +57,9 @@ class Oss
 
     public function getUrl($uniqueName, $time = 3600) {
         try{
+            if(isProduction()) {
+                $this->client->setUseSSL(true);
+            }
             return $this->client->signUrl($this->bucket, $uniqueName, $time);
         } catch(OssException $e) {
             \Yii::error(__FUNCTION__ . ": FAILED\n");
