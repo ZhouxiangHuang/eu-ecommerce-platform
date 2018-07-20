@@ -1,12 +1,14 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
 
 if(isProduction()) {
+    $params = require __DIR__ . '/pro_params.php';
     $db = require __DIR__ . '/pro_db.php';
 } elseif(isTesting()) {
+    $params = require __DIR__ . '/test_params.php';
     $db = require __DIR__ . '/test_db.php';
 } else {
+    $params = require __DIR__ . '/dev_params.php';
     $db = require __DIR__ . '/db.php';
 }
 

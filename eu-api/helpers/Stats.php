@@ -14,8 +14,6 @@ use app\modules\site\models\MerchantsTags;
 class Stats
 {
     static function countMerchantsInCategories($categories) {
-        \Yii::error('start: '. microtime());
-
         $tagCounter = []; //key tagId(categoryId) : value number of merchants
         $merchantTags = MerchantsTags::find()->all();
         foreach ($merchantTags as $tag) {

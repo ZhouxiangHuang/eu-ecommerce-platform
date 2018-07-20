@@ -1,12 +1,14 @@
 <?php
 
-$params = require __DIR__ . '/params.php';
 
 if($_SERVER['APP_ENV'] === "testing") {
+    $params = require __DIR__ . '/test_params.php';
     $db = require __DIR__ . '/test_db.php';
 } elseif($_SERVER['APP_ENV'] === "production") {
+    $params = require __DIR__ . '/pro_params.php';
     $db = require __DIR__ . '/pro_db.php';
 } else {
+    $params = require __DIR__ . '/dev_params.php';
     $db = require __DIR__ . '/db.php';
 }
 
