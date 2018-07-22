@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="61dfa135-1579-405f-93bf-0346d811ef44" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/eu-api/config/pro_params.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eu-api/config/test_params.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eu-api/config/console.php" beforeDir="false" afterPath="$PROJECT_DIR$/eu-api/config/console.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eu-api/config/params.php" beforeDir="false" afterPath="$PROJECT_DIR$/eu-api/config/dev_params.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eu-api/config/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/eu-api/config/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eu-api/helpers/Oss.php" beforeDir="false" afterPath="$PROJECT_DIR$/eu-api/helpers/Oss.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eu-api/helpers/Stats.php" beforeDir="false" afterPath="$PROJECT_DIR$/eu-api/helpers/Stats.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eu-api/helpers/WechatHelper.php" beforeDir="false" afterPath="$PROJECT_DIR$/eu-api/helpers/WechatHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eu-api/modules/site/ProductManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/eu-api/modules/site/ProductManager.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,20 +17,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="dev_params.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/eu-api/config/dev_params.php">
+      <file leaf-file-name="MerchantController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/MerchantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="54" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
+            <state relative-caret-position="150">
+              <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pro_params.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/eu-api/config/pro_params.php">
+      <file leaf-file-name="Merchants.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" selection-start-line="5" selection-end-line="7" />
+            <state relative-caret-position="82">
+              <caret line="113" selection-start-line="113" selection-end-line="113" />
+              <folding>
+                <element signature="e#43#69#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Products.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Products.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="166">
+              <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductManager.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/eu-api/modules/site/ProductManager.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="72" column="63" selection-start-line="72" selection-start-column="63" selection-end-line="72" selection-end-column="63" />
             </state>
           </provider>
         </entry>
@@ -53,9 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>rollback</find>
-      <find>actionValidate</find>
-      <find>validate</find>
       <find>-&gt;where</find>
       <find>-&gt;orderBy</find>
       <find>::findAll</find>
@@ -83,6 +94,9 @@
       <find>params.php</find>
       <find>production-bucket</find>
       <find>微信验证失败</find>
+      <find>v</find>
+      <find>update</find>
+      <find>orderBy</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -94,7 +108,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/eu-api/migrations/m180602_073728_EditProductImageTable.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/models/ProductImages.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/models/Countries.php" />
         <option value="$PROJECT_DIR$/eu-api/migrations/m180610_065106_EditUserTable.php" />
@@ -121,7 +134,6 @@
         <option value="$PROJECT_DIR$/eu-api/migrations/m180701_110116_MerchantPosters.php" />
         <option value="$PROJECT_DIR$/eu-api/migrations/m180701_110117_MerchantPosters.php" />
         <option value="$PROJECT_DIR$/eu-api/migrations/m180701_110118_MerchantPosters.php" />
-        <option value="$PROJECT_DIR$/eu-api/modules/site/ProductManager.php" />
         <option value="$PROJECT_DIR$/eu-api/config/pro_db.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/controllers/ProductController.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/models/ProductCategories.php" />
@@ -134,7 +146,6 @@
         <option value="$PROJECT_DIR$/eu-api/migrations/m180715_093011_EditPosterTable.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/controllers/MerchantController.php" />
         <option value="$PROJECT_DIR$/eu-api/helpers/aliyun-oss-php-sdk-2.3.0/src/OSS/OssClient.php" />
-        <option value="$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php" />
         <option value="$PROJECT_DIR$/eu-api/modules/site/controllers/UserController.php" />
         <option value="$PROJECT_DIR$/eu-api/config/params.php" />
         <option value="$PROJECT_DIR$/eu-api/config/web.php" />
@@ -145,6 +156,9 @@
         <option value="$PROJECT_DIR$/eu-api/helpers/WechatHelper.php" />
         <option value="$PROJECT_DIR$/eu-api/helpers/Stats.php" />
         <option value="$PROJECT_DIR$/eu-api/config/dev_params.php" />
+        <option value="$PROJECT_DIR$/eu-api/vendor/rmccue/requests/library/Requests.php" />
+        <option value="$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php" />
+        <option value="$PROJECT_DIR$/eu-api/modules/site/ProductManager.php" />
       </list>
     </option>
   </component>
@@ -183,8 +197,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="5" />
-    <option name="y" value="-939" />
+    <option name="x" value="4" />
+    <option name="y" value="22" />
     <option name="width" value="1436" />
     <option name="height" value="808" />
   </component>
@@ -193,7 +207,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -210,12 +223,28 @@
               <item name="eu-ecommerce-platform" type="b2602c69:ProjectViewProjectNode" />
               <item name="eu-ecommerce-platform" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="eu-api" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="eu-ecommerce-platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eu-ecommerce-platform" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="eu-api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="site" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="eu-ecommerce-platform" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eu-ecommerce-platform" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="eu-api" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="site" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -382,16 +411,16 @@
       <workItem from="1530945322995" duration="1948000" />
       <workItem from="1531646922573" duration="1506000" />
       <workItem from="1531714996073" duration="6803000" />
-      <workItem from="1531988072884" duration="3392000" />
+      <workItem from="1531988072884" duration="3601000" />
+      <workItem from="1532098301117" duration="3395000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="286421000" />
+    <option name="totallyTimeSpent" value="290025000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="5" y="-939" width="1436" height="808" extended-state="0" />
-    <editor active="true" />
+    <frame x="4" y="22" width="1436" height="808" extended-state="0" />
     <layout>
       <window_info anchor="right" id="PlantUML" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -399,8 +428,8 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32770744" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49928263" weight="0.47960618" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3701578" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" sideWeight="0.49928263" visible="true" weight="0.47960618" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.37517935" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Find" order="1" />
@@ -417,21 +446,21 @@
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34603423" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286119" />
+      <window_info anchor="right" id="PlantUML" order="3" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3654391" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="right" id="PlantUML" order="3" />
+      <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
   </component>
@@ -453,24 +482,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/eu-api/tests/unit/ExampleTest.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="10" selection-start-line="7" selection-start-column="10" selection-end-line="7" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eu-api/vendor/yiisoft/yii2/base/Module.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="117">
           <caret line="56" column="11" selection-start-line="56" selection-start-column="11" selection-end-line="56" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/vendor/rmccue/requests/library/Requests.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="261" column="26" selection-start-line="261" selection-start-column="26" selection-end-line="261" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -534,13 +549,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="587">
           <caret line="175" column="20" selection-start-line="175" selection-start-column="20" selection-end-line="175" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/ProductManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="120" column="32" selection-start-line="120" selection-start-column="32" selection-end-line="120" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -642,13 +650,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/config/deploy.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="106" column="59" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eu-api/migrations/m180610_065106_EditUserTable.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -708,24 +709,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/MerchantController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/UserCollections.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="87" column="63" selection-start-line="87" selection-start-column="63" selection-end-line="87" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Products.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="131" column="20" selection-start-line="131" selection-start-column="20" selection-end-line="131" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -757,27 +744,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="76" column="20" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
-          <folding>
-            <element signature="e#43#69#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/eu-api/helpers/Oss.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="28" selection-start-line="28" selection-end-line="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/helpers/WechatHelper.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="38" column="35" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -802,10 +772,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/eu-api/config/pro_params.php">
+    <entry file="file://$PROJECT_DIR$/eu-api/config/deploy.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="5" selection-end-line="7" />
+        <state relative-caret-position="122">
+          <caret line="45" column="24" lean-forward="true" selection-start-line="45" selection-start-column="24" selection-end-line="45" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/config/deploy/demo.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="55" selection-start-line="2" selection-start-column="54" selection-end-line="2" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -813,6 +790,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="54" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/helpers/WechatHelper.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="73">
+          <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/vendor/rmccue/requests/library/Requests.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/config/pro_params.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="5" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/controllers/MerchantController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="27" column="34" selection-start-line="27" selection-start-column="34" selection-end-line="27" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Merchants.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="113" selection-start-line="113" selection-end-line="113" />
+          <folding>
+            <element signature="e#43#69#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/models/Products.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="101" column="32" selection-start-line="101" selection-start-column="32" selection-end-line="101" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eu-api/modules/site/ProductManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="72" column="63" selection-start-line="72" selection-start-column="63" selection-end-line="72" selection-end-column="63" />
         </state>
       </provider>
     </entry>

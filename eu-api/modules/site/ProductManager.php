@@ -70,6 +70,7 @@ class ProductManager
         $product->deleteImage($deletes);
         $product->save();
         if($product->errors) {
+            \Yii::error(ArrayHelper::getValue($form, 'price'));
             \Yii::error($product->errors);
             return false;
         } else {
