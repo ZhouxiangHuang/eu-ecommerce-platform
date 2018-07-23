@@ -28,7 +28,7 @@ class ScoreManager
 
         foreach ($merchants as $merchant) {
             /** @var Merchants $merchant */
-            \Yii::getLogger()->log('Merchant ID: ___' . $merchant->id . '___', Logger::LEVEL_INFO);
+            echo'Merchant ID: ___' . $merchant->id . '___' . PHP_EOL;
             $totalScore = 0;
             foreach ($this->calculators as $calculator) {
                 /** @var InterfaceCalculator $calculator */
@@ -36,7 +36,7 @@ class ScoreManager
                 $totalScore += $score;
             }
 
-            \Yii::getLogger()->log('Merchant ID: ___' . $merchant->id . '___total:' . $totalScore, Logger::LEVEL_INFO);
+            echo 'Merchant ID: ___' . $merchant->id . '___total:' . $totalScore . PHP_EOL;
             $merchant->score = $totalScore;
             $merchant->save();
         }

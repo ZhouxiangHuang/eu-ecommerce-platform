@@ -26,7 +26,8 @@ class UserController extends BaseController
         $code = Yii::$app->request->post('code');
         $role = Yii::$app->request->post('role');
         $storeName = Yii::$app->request->post('store_name');
-        $address = Yii::$app->request->post('address');
+        $country = Yii::$app->request->post('country_code');
+        $city = Yii::$app->request->post('city_code');
         $mobile = Yii::$app->request->post('mobile');
 
         $userWechatInfo = WechatHelper::userInfo($code);
@@ -42,10 +43,10 @@ class UserController extends BaseController
         }
 
         if($role == User::ROLE_MERCHANT && !User::getMerchant($userId)) {
-            if(!$storeName || !$address || !$mobile) {
+            if(!$storeName || !$country || !$city || !$mobile) {
                 return $this->returnJson([], false, '缺少必要参数');
             }
-            Merchants::register($userId, $storeName, $address, $mobile);
+            Merchants::register($userId, $storeName, $mobile, $country, $city);
         }
 
         $merchant = User::getMerchant($userId);

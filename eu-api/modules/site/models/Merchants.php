@@ -75,11 +75,12 @@ class Merchants extends \yii\db\ActiveRecord
         ];
     }
 
-    static function register($userId, $storeName, $address, $mobile) {
+    static function register($userId, $storeName, $mobile, $country, $city) {
         $merchant = new Merchants();
         $merchant->user_id = $userId;
         $merchant->store_name = $storeName;
-        $merchant->address = $address;
+        $merchant->country = $country;
+        $merchant->city = $city;
         $merchant->mobile = $mobile;
         $merchant->status = 1;
         $merchant->save();
