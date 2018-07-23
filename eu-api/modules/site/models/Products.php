@@ -43,7 +43,7 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             [['merchant_id', 'product_unique_code'], 'required'],
-            [['price', 'merchant_id', 'cover_image', 'status'], 'integer'],
+            [['merchant_id', 'cover_image', 'status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['type'], 'string', 'max' => 18],
             [['product_unique_code'], 'string', 'max' => 10],

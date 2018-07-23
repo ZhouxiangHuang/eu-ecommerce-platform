@@ -23,6 +23,7 @@ use yii\web\UploadedFile;
  * @property string $address 地址
  * @property string $mobile 联系电话
  * @property string $status 状态
+ * @property integer $score 状态
  * @property string $announcement 公告
  * @property string $profile_img_name OSS图片名
  * @property string $created_at 创建时间
@@ -111,6 +112,7 @@ class Merchants extends \yii\db\ActiveRecord
             ->where($queries)
             ->offset($offset * Merchants::LIST_SIZE)
             ->limit(Merchants::LIST_SIZE)
+            ->orderBy('score desc')
             ->all();
 
         $result = [];

@@ -60,6 +60,8 @@ class ProductController extends BaseController
             'product_id' => Yii::$app->request->post('product_id')
         ];
 
+        Yii::error(Yii::$app->request->post('price'));
+
         $productManager = new ProductManager();
         $isSuccess = $productManager->updateProduct($form);
 

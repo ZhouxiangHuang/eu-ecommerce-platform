@@ -1,10 +1,10 @@
 <?php
 
 
-if($_SERVER['APP_ENV'] === "testing") {
+if(isset($_SERVER['APP_ENV']) && $_SERVER['APP_ENV'] === "testing") {
     $params = require __DIR__ . '/test_params.php';
     $db = require __DIR__ . '/test_db.php';
-} elseif($_SERVER['APP_ENV'] === "production") {
+} elseif(isset($_SERVER['APP_ENV']) && $_SERVER['APP_ENV'] === "production") {
     $params = require __DIR__ . '/pro_params.php';
     $db = require __DIR__ . '/pro_db.php';
 } else {
