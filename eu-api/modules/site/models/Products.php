@@ -18,6 +18,7 @@ use yii\web\UploadedFile;
  * @property string $product_unique_code 编号
  * @property int $cover_image 封面图
  * @property int $hot_item 是否热销
+ * @property int $encoded 价格加密
  * @property int $status 状态
  * @property int $merchant_category_id 种类id
  * @property string $description 简介
@@ -123,6 +124,24 @@ class Products extends \yii\db\ActiveRecord
         return $urls;
     }
 
+    public function encodePrice() {
+        $this->encoded = 1;
+        return $this->save();
+    }
+
+    public function decodePrice() {
+        $this->encoded = 0;
+        return $this->save();
+    }
+
+    public function getPrice() {
+        if(!$this->encoded) {
+            return $this->price;
+        } else {
+            return '****';
+        }
+    }
+
     static function deleteOne($merchantId, $productId) {
         $model = Products::findOne(['merchant_id' => $merchantId, 'id' => $productId]);
         $model->status = 0;
@@ -132,7 +151,7 @@ class Products extends \yii\db\ActiveRecord
     static function format(Products $product) {
         $product = [
             'id' => $product->id,
-            'price' => $product->price,
+            'price' => $product->getPrice(),
             'merchant_id' => $product->merchant_id,
             'name' => $product->name,
             'product_unique_code' => $product->product_unique_code,

@@ -97,7 +97,7 @@ class ProductManager
         }
         $productArray[] = [
             'id' => 0,
-            'name' => '热卖',
+            'name' => '热销',
             'products' => $productList,
             'is_hot' => true
         ];

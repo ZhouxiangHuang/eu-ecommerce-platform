@@ -34,19 +34,7 @@ class Stats
                 }
             }
         }
-//
-//        foreach ($tagCounter as $catId => $merchNum) {
-//            foreach ($categories as $category) {
-//                $found = self::findInTree($catId, $category);
-//                if($found) {
-//                    $result[$category['id']] += $merchNum;
-//                } else {
-//                    $result[$category['id']] = 0;
-//                }
-//            }
-//        }
 
-        \Yii::error('end: ' . microtime());
         return $result;
     }
 

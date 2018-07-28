@@ -12,6 +12,7 @@ if(isset($_SERVER['APP_ENV']) && $_SERVER['APP_ENV'] === "testing") {
     $db = require __DIR__ . '/db.php';
 }
 
+
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'timezone' => 'Asia/Shanghai',
     'adminEmail' => 'admin@example.com',
     'mp'=> [
 //        'app_id' => 'wxe2192bf1c03375fe',

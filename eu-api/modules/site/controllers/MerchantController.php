@@ -107,6 +107,7 @@ class MerchantController extends BaseController
         $array['country_code'] = $merchant->country;
         $array['city_code'] = $merchant->city;
         $array['address'] = $merchant->address;
+        $array['qr_code'] = $merchant->getQrCode();
         $array['currency'] = $merchant->getCurrency();
         $array['region'] = ArrayHelper::getValue($countryModel, 'name') . '/' . ArrayHelper::getValue($cityModel, 'name');
         $array['tags'] = MerchantsTags::getAllTags($merchant->id);

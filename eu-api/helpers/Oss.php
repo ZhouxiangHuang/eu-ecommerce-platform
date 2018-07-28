@@ -29,8 +29,6 @@ class Oss
         $this->accessId = $app->params['oss']['access_id'];
         $this->accessKey = $app->params['oss']['key'];
 
-        \Yii::error($this->bucket);
-
         try {
             $this->client = new OssClient($this->accessId, $this->accessKey, $this->endpoint, true);
         } catch (OssException $e) {

@@ -32,6 +32,7 @@ use yii\web\UploadedFile;
 class Merchants extends \yii\db\ActiveRecord
 {
     const LIST_SIZE = 10;
+    const AUTH_TYPE_PRICE = "PRICE";
 
     /**
      * @inheritdoc
@@ -210,7 +211,7 @@ class Merchants extends \yii\db\ActiveRecord
 
         if(count($products) < 3) {
             for($i = 0; $i < 3 - count($products); $i ++) {
-                $images[] = ['url' => '/images/no-image-sm.png'];
+                $images[] = ['url' => '/images/default-product.png'];
             }
         }
 
@@ -241,5 +242,33 @@ class Merchants extends \yii\db\ActiveRecord
         }
 
         return $dataSource->getImageUrl($fileName);
+    }
+
+    public function getVerCode() {
+        $timestamp = time() - (15 * 60);
+        $fifteenMinutesAgo = date("Y-m-d H:i:s", $timestamp);
+
+        //查看最新的code是否过期
+        $code = VerificationCodes::find()
+            ->where(['user_id' => $this->user_id])
+            ->andWhere("created_at > '" . $fifteenMinutesAgo . "'")
+            ->one();
+
+        if(!$code) {
+            VerificationCodes::generate($this->user_id);
+            $code = $this->getVerCode();
+        }
+
+        return $code;
+    }
+
+    public function authorize($userId, $type) {
+        if(!$this->isAuthorized($userId, $type)) {
+            MerchantAuthorization::authorize($this->id, $userId, $type);
+        }
+    }
+
+    public function isAuthorized($userId, $type) {
+        return MerchantAuthorization::isAuthorized($this->id, $userId, $type);
     }
 }
