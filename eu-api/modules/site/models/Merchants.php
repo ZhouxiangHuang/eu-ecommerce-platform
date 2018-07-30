@@ -218,6 +218,15 @@ class Merchants extends \yii\db\ActiveRecord
         return $images;
     }
 
+    public function hasProduct($productId) {
+        $exists = Products::find()
+            ->where(['id' => $productId])
+            ->andWhere(['merchant_id' => $this->id])
+            ->exists();
+
+        return $exists;
+    }
+
     public function getCurrency() {
         $currencyModel = Currency::findOne(['id' => $this->currency_id]);
         return $currencyModel->symbol;

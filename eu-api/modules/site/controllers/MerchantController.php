@@ -19,6 +19,7 @@ use app\modules\site\models\Merchants;
 use app\modules\site\models\MerchantsTags;
 use app\modules\site\models\Poster;
 use app\modules\site\models\User;
+use app\modules\site\models\VerificationCodes;
 use Yii;
 use yii\helpers\ArrayHelper;
 
@@ -115,6 +116,13 @@ class MerchantController extends BaseController
         return $this->returnJson($array, true);
     }
 
+    public function actionGenerateCode() {
+        $merchant = $this->getMerchantModel();
+        $codeModel = $merchant->getVerCode();
+
+        return $this->returnJson($codeModel->code);
+    }
+
     public function actionCategories() {
         $merchant = $this->getMerchantModel();
         $categories = MerchantCategories::all($merchant->id);
@@ -127,6 +135,25 @@ class MerchantController extends BaseController
             $result[] = $model;
         }
         return $this->returnJson($result);
+    }
+
+    /**
+     * @throws \yii\base\Exception
+     * @return mixed
+     */
+    public function actionVerifyCode() {
+        $merchant_id = Yii::$app->request->post('merchant_id');
+        $code = Yii::$app->request->post('code');
+
+        $user = $this->getUserModel();
+        $merchant = Merchants::findOne(['id' => $merchant_id]);
+        if(VerificationCodes::isValid($merchant_id, $code)) {
+            $merchant->authorize($user->id, Merchants::AUTH_TYPE_PRICE);
+        } else {
+            return $this->returnJson(null, false, "验证失败");
+        }
+
+        return $this->returnJson(null);
     }
 
     public function actionUploadProfile() {

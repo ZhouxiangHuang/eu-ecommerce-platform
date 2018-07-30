@@ -134,8 +134,8 @@ class Products extends \yii\db\ActiveRecord
         return $this->save();
     }
 
-    public function getPrice() {
-        if(!$this->encoded) {
+    public function getPrice($showPrice = false) {
+        if(!$this->encoded || $showPrice) {
             return $this->price;
         } else {
             return '****';
@@ -148,14 +148,15 @@ class Products extends \yii\db\ActiveRecord
         return $model->save();
     }
 
-    static function format(Products $product) {
+    static function format(Products $product, $showPrice=false) {
         $product = [
             'id' => $product->id,
-            'price' => $product->getPrice(),
+            'price' => $product->getPrice($showPrice),
             'merchant_id' => $product->merchant_id,
             'name' => $product->name,
             'product_unique_code' => $product->product_unique_code,
             'hot_item' => $product->hot_item,
+            'encoded' => $product->encoded,
             'description' => $product->description,
             'merchant_category_id' => $product->merchant_category_id,
             'images' => $product->getImages(),

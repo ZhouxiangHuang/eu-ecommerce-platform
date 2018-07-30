@@ -10,6 +10,7 @@ namespace app\modules\site\controllers;
 
 use app\helpers\Stats;
 use app\modules\site\models\MerchantCategories;
+use app\modules\site\models\Merchants;
 use app\modules\site\models\ProductCategories;
 use app\modules\site\models\Products;
 use app\modules\site\models\User;
@@ -30,6 +31,7 @@ class ProductController extends BaseController
             'price' => Yii::$app->request->post('price'),
             'code' => Yii::$app->request->post('code'),
             'hot' =>  Yii::$app->request->post('hot'),
+            'encoded' =>  Yii::$app->request->post('encoded'),
             'description' => Yii::$app->request->post('description'),
             'merchant_id' => $this->getMerchantModel()->id
         ];
@@ -54,6 +56,7 @@ class ProductController extends BaseController
             'price' => Yii::$app->request->post('price'),
             'code' => Yii::$app->request->post('code'),
             'hot' =>  Yii::$app->request->post('hot'),
+            'encoded' =>  Yii::$app->request->post('encoded'),
             'description' => Yii::$app->request->post('description'),
             'merchant_id' => $this->getMerchantModel()->id,
             'delete_list' => Yii::$app->request->post('delete_list'),
@@ -68,15 +71,28 @@ class ProductController extends BaseController
         return $this->returnJson([], $isSuccess);
     }
 
-    public function actionDetail($product_id) {
+    public function actionDetail($product_id, $for_edit=0) {
+        if($for_edit) {
+        //如果用于编辑，必须显示产品价格，所以需要查看产品id是否属于商家
+            $merchant = $this->getMerchantModel();
+            if(!$merchant->hasProduct($product_id)) {
+                return $this->returnJson('', false, "产品不属于商家");
+            }
+        }
         $productManager = new ProductManager();
-        $product = $productManager->getProduct($product_id);
+        $product = $productManager->getProduct($product_id, $for_edit == 1);
         return $this->returnJson($product, true);
     }
 
+    /**
+     * @throws \yii\base\Exception
+     */
     public function actionProducts($merchant_id) {
+        $user = $this->getUserModel();
+        $merchant = Merchants::findOne(['id' => $merchant_id]);
         $productManager = new ProductManager();
-        $products = $productManager->listProducts($merchant_id);
+        $showPrice = $merchant->isAuthorized($user->id, Merchants::AUTH_TYPE_PRICE);
+        $products = $productManager->listProducts($merchant_id, $showPrice);
 
         return $this->returnJson($products, true);
     }

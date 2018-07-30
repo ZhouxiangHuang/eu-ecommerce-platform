@@ -25,6 +25,7 @@ class ProductManager
             $product->merchant_id = ArrayHelper::getValue($form, 'merchant_id');
             $product->product_unique_code = ArrayHelper::getValue($form, 'code');
             $product->price = ArrayHelper::getValue($form, 'price');
+            $product->encoded = ArrayHelper::getValue($form, 'encoded');
             $product->hot_item = ArrayHelper::getValue($form, 'hot');
             $product->description = ArrayHelper::getValue($form, 'description');
             $product->status = 1;
@@ -59,6 +60,7 @@ class ProductManager
         $product->merchant_id = ArrayHelper::getValue($form, 'merchant_id');
         $product->product_unique_code = ArrayHelper::getValue($form, 'code');
         $product->price = ArrayHelper::getValue($form, 'price');
+        $product->encoded = ArrayHelper::getValue($form, 'encoded');
         $product->hot_item = ArrayHelper::getValue($form, 'hot');
         $product->description = ArrayHelper::getValue($form, 'description');
         if($fileName =  ArrayHelper::getValue($form, 'file_name')) {
@@ -78,12 +80,12 @@ class ProductManager
         }
     }
 
-    public function getProduct($productId) {
+    public function getProduct($productId, $showPrice) {
         $product = Products::findOne(['id' => $productId]);
-        return Products::format($product);
+        return Products::format($product, $showPrice);
     }
 
-    public function listProducts($merchantId) {
+    public function listProducts($merchantId, $showPrice=false) {
         $categories = MerchantCategories::all($merchantId);
         $products = Products::all($merchantId);
         $productArray = [];
@@ -92,7 +94,7 @@ class ProductManager
         $productList = [];
         foreach ($products as $product) {
             if ($product->hot_item) {
-                $productList[] = Products::format($product);
+                $productList[] = Products::format($product, $showPrice);
             }
         }
         $productArray[] = [
@@ -113,7 +115,7 @@ class ProductManager
             foreach ($products as $product) {
                 if($category->id == $product->merchant_category_id)
                 {
-                    array_unshift($productList, Products::format($product));
+                    array_unshift($productList, Products::format($product, $showPrice));
                 }
             }
             $productArray[] = [
